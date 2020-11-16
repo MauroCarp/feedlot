@@ -102,52 +102,11 @@ if( $seEnvioInfo ) {
          <?php }
         ?>
       </select>
-      <!-- <hr>
-      <a href="#" data-toggle="modal" data-target=".nueva"><b>Nuevo Feedlot +</b></a> -->
       <hr>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
       <br>
       <p class="mt-5 mb-3 text-muted">&copy; Gestion de Feedlots 2019</p>
     </form>
-    <!--
-    <div class="modal fade bd-example-modal-sm nueva" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <form style="padding: 15px;" method="POST" action="login.php?accion=nueva">
-            <div class="form-group">
-              <label><h3>Nuevo Feedlot</h3></label>
-              <div class="row-fluid">
-                <div class="span3">
-                  <h5 style="margin-top: 5px;text-align: left;">Nombre Feedlot:</h5>
-                </div>
-              </div>
-              <div class="row-fluid">
-                <div class="span3">
-                  <input type="text" name="feedlot" class="form-control input-element" required>
-                </div>
-              </div>
-              <div class="row-fluid">
-                <div class="span2">
-                  <h5 style="margin-top: 5px;text-align: left;">Manual:</h5>
-                </div>
-                <div class="span1">
-                  <input type="radio" name="tipo" class="form-control input-element" value="manual" checked="true">
-                </div>
-                <div class="span2">
-                  <h5 style="margin-top: 5px;text-align: left;">Balanza:</h5>
-                </div>
-                <div class="span1">
-                  <input type="radio" name="tipo" class="form-control input-element" value="balanza">
-                </div>
-              </div>
-            </div>
-            <hr>
-            <button style="float: right;" type="submit" class="btn btn-lg btn-primary btn-block">Cargar</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    --->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="js/jquery-slim.min.js"><\/script>')</script>
     <script src="js/popper.min.js"></script>

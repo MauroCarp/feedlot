@@ -38,7 +38,7 @@ if(strtolower(end($chk_ext)) == "csv"){
 
 	$tropaValido = mysqli_fetch_array($queryTropa);
 
-	echo mysqli_error($conexion);
+	// echo mysqli_error($conexion);
 
 	if ($tropaValido['valido'] != 0 ) { ?>
 
@@ -79,7 +79,7 @@ if(strtolower(end($chk_ext)) == "csv"){
 					// $grupo = registroVacioString($data[17]);
 
 
-					echo $IDE."-".$peso."-".$notas."-".$sexo."-".$proveedor."-".$corral."-".$numeroDTE."-".$origen."-".$fecha."-".$hora."-".$causaMuerte."<br>";
+					// echo $IDE."-".$peso."-".$notas."-".$sexo."-".$proveedor."-".$corral."-".$numeroDTE."-".$origen."-".$fecha."-".$hora."-".$causaMuerte."<br>";
 
 					//Insertamos los datos con los valores...
 					
@@ -89,7 +89,7 @@ if(strtolower(end($chk_ext)) == "csv"){
 					mysqli_query($conexion,$sql);
 
 					// or die('<b>Error: Compuebe que el archivo este correcto.</b><br>Intente descargandolo nuevamente, y volviendolo a cargar en el sistema.<br>Para volver a la pagina anterior, click en la flecha ATRAS del navegador.');
-					echo mysqli_error($conexion);
+					// echo mysqli_error($conexion);
 					$totalAnimales++;
 					
 				}

@@ -120,13 +120,17 @@ if(!$comparacionValido){
 			$cantidadMuertes = 0;
 			$sqlMuertes = "SELECT fecha,muertes,causaMuerte FROM muertes WHERE feedlot = '$feedlot' AND fecha BETWEEN '$desde' AND '$hasta' ORDER BY fecha ASC";
 			$queryMuertes = mysqli_query($conexion,$sqlMuertes);
-			while ($filaMuertes = mysqli_fetch_array($queryMuertes)) {
-				$cantidadMuertes = $cantidadMuertes.",".$filaMuertes['muertes'];
-				$labelsMuertes = $labelsMuertes.",'".formatearFecha($filaMuertes['fecha'])."'";
+			if (!empty($queryMuertes)) {
+			
+				while ($filaMuertes = mysqli_fetch_array($queryMuertes)) {
+					$cantidadMuertes = $cantidadMuertes.",".$filaMuertes['muertes'];
+					$labelsMuertes = $labelsMuertes.",'".formatearFecha($filaMuertes['fecha'])."'";
+				}
+				$labelsMuertes = substr($labelsMuertes,1);
+				$cantidadMuertes = substr($cantidadMuertes, 2);
+				echo $labelsMuertes;
 			}
-			$labelsMuertes = substr($labelsMuertes,1);
-			$cantidadMuertes = substr($cantidadMuertes, 2);
-			echo $labelsMuertes;
+
 	        ?>
 
 	        ],

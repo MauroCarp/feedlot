@@ -117,6 +117,11 @@ if(!$comparacionValido){
 				title: {
 					display: true,
 					text: 'Cant. Segun Sexo'
+				},
+				plugins:{
+					labels: {
+						render: 'value'
+					}
 				}
 
 			}
@@ -156,6 +161,11 @@ if(!$comparacionValido){
 		  animation: {
 		    animateScale: true,
 		    animateRotate: true
+		  },
+		  plugins:{
+			labels: {
+				render: 'value'
+			}
 		  }
 
 		}

@@ -2,7 +2,7 @@
 include('includes/conexion.php');
 
 $sql = "SELECT * FROM muertes ORDER BY id DESC";
-$query = mysqli_query($conexion2,$sql);
+$query = mysqli_query($conexion,$sql);
 $contador = 1;
 while($resultado = mysqli_fetch_array($query)){
 

@@ -1,6 +1,0 @@
-Núm. Archivo: 1072
-Nombre: Muerto enfermeria
-Fecha: 6/8/2020
-F01IDE(16)isID;DW2Peso();C01Notas sobre el animal(128)notID;F13Sexo()notID;F23Proveedor()notID;C11Corral(50)notID;F31Origen(50)notID;C22Total de días()notID;F43Causa de Muerte()notID;C34Fecha(d/M/yyyy)notID;C44Hora(HH:mm:ss)notID
-IDE;Peso;Notas sobre el animal;Sexo;Proveedor;Corral;Origen;Total de días;Causa de Muerte;Fecha;Hora
-982 126058224781;;;Hembra;Salvucci;20;Gualeguaychu;56;Neumo;6/8/2020;15:16:12

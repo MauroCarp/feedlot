@@ -292,5 +292,14 @@ function registroVacioFecha($registro){
 	return $dato;
 }
 
+function obtenerMax($campo,$tabla,$conexion){
+	$sql = "SELECT MAX($campo) as maximo FROM $tabla";
+	$query = mysqli_query($conexion,$sql);
+	echo mysqli_error($conexion);
+	$resultado = mysqli_fetch_array($query);
+	$maximo = ($resultado['maximo'] != '') ? $resultado['maximo'] : 0;
+	return $maximo;
+}
+
 ?>
 
