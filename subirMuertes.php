@@ -69,18 +69,6 @@ if(strtolower(end($chk_ext)) == "csv"){
 					$fecha = $fecha[2]."-".$fecha[1]."-".$fecha[0];
 					$hora = $data[10];
 					
-					
-					// $LID = registroVacioString($data[1]);
-					// $numeroDTE = registroVacioNumero($data[4]);
-					// $gdmTotal = registroVacioNumero($data[9]);
-					// $gpvTotal = registroVacioNumero($data[10]);
-					// $estado = registroVacioString($data[15]);
-					// $statusDate = registroVacioFecha($data[16]);
-					// $grupo = registroVacioString($data[17]);
-
-
-					// echo $IDE."-".$peso."-".$notas."-".$sexo."-".$proveedor."-".$corral."-".$numeroDTE."-".$origen."-".$fecha."-".$hora."-".$causaMuerte."<br>";
-
 					//Insertamos los datos con los valores...
 					
 					$sql = "INSERT INTO muertes(feedlot,tropa,IDE,peso,sexo,proveedor,corral,origen,totalDias,causaMuerte,fecha,hora) 
@@ -110,7 +98,3 @@ if(strtolower(end($chk_ext)) == "csv"){
 }
 
 ?>
-	<!-- <form name="f1" class="form-horizontal" method="POST" action="subirMuertes.php" enctype="multipart/form-data"> 
-		<input type="submit" class="btn btn-primary btn-lg" name="submit" value="Subir" />
-		<input type="file" name="fileMuertes" required />
-	</form> -->

@@ -630,7 +630,29 @@ if ($accionValido) {
         <?php 
           }
         }?>
+
+        function cambiar(id,info){
+          var pdrs = document.getElementById(id).files[0].name;
+          document.getElementById(info).innerHTML = pdrs;
+        }
+            
+
+        var mixer = (document).getElementById('selectMixer');
         
+        mixer.addEventListener('change',()=>{
+
+          var tipoMixer = $('#selectMixer').val();
+
+          if(tipoMixer == 'mixer2'){
+
+            $('#mixer2cantidad').css('display','block');
+
+            $('form').attr('action','ingresoMixer2.php');
+
+          }
+
+        });
+
         
     </script>    
     <!-- Placed at the end of the document so the pages load faster -->

@@ -1,61 +1,93 @@
-<hr style='padding:5px,5px;margin-top:5px;'>
 <div class="row-fluid">
   <div class="12">
-    <form method="POST" class="form-horizontal" action="ingresoMixer1.php" enctype="multipart/form-data">          
+    <form method="POST" class="form-horizontal" action="raciones.php?accion=ingresar">
       <div class="row-fluid">
-
-        <div class="span3">
-
-          <label for="file-uploadIng" class="btn btn-primary">
-
-              <i class="fas fa-cloud-upload-alt"></i> Seleccionar archivo
-
-          </label>
-
-          <input id="file-uploadIng" onchange="cambiar('file-uploadIng','infoIng')" type="file" name="ingresoMixer" style='display: none;' required/>
-
-          <div id="infoIng" style="text-align: left;font-weight: bold;">No se eligi&oacute; archivo.</div>
-        </div>
-        
-
-        <div class="span4">
-
-          <label for="selectMixer"><b>Seleccionar Mixer</b></label>
-
-          <select name="mixer" id='selectMixer'>
-
-            <option value="mixer1">456ST</option>
-
-            <option value="mixer2">Mixer 2</option>
-
-          </select>
-          
-        </div>
-
-        <div class="span4" id="mixer2cantidad" style="display:none">
-
-          <label for="cantidad"><b>Cantidad de Animales</b></label>
-
-          <input type="number" id="cantidad" name="cantidad" maxlength="4" size="4">
-
-        </div>
-        
-
-      </div>
-    <br>
-      <div class="row-fluid">
-
-        <div class="span12">
-
-          <button type="submit" name="submit" class="btn btn-large btn-block btn-primary" accept=".xls,.xlsx">Cargar Registro</button>
-
+        <div class="span6">
+          <div class="control-group">
+            <label class="control-label formulario" for="inputFechaIng">Fecha Ingreso:</label>
+            <div class="controls">
+              <input type="date" class="input-medium" id="inputFechaIng" name="fechaIngreso" placeholder="Fecha Ingreso" autofocus required>
+            </div>
+          </div>           
+                
+          <div class="control-group">
+            <label class="control-label formulario" for="inputOperario">Operario:</label>
+            <div class="controls">
+              <select id="inputOperario" class="input-medium" name="operario" required>
+                <option value="">Seleccionar Operario</option>
+                <?php
+                  $sqlOperarios = "SELECT nombre FROM operarios WHERE feedlot = '$feedlot' ORDER BY nombre ASC";
+                  $queryOperarios = mysqli_query($conexion,$sqlOperarios);
+                  while ($operarios = mysqli_fetch_array($queryOperarios)) { ?>
+                  }
+                      <option value="<?php echo $operarios['nombre'];?>"><?php echo $operarios['nombre'];?></option>
+                  <?php
+                }  
+                ?>
+                <option value="otro">Otro</option>
+              </select>
+              <input type="text" class="form-control input-medium otroOperario" id="mostrarOperario" name="operarioOtro" value="">
+            </div>
+          </div>           
+          <div class="control-group">
+            <label class="control-label formulario" for="inputCorral">Corral:</label>
+            <div class="controls">
+              <input type="text" class="input-medium" id="inputCorral" name="corral">
+            </div>
+          </div>           
         </div>
 
-      </div>
-
+        <div class="row-fluid">
+          <div class="span6">
+            <div class="control-group">
+            <label class="control-label formulario" for="inputTurno">Turno:</label>
+            <div class="controls">
+              <select id="inputTurno" name="turno" class="input-medium" required>
+                <option value="Ma&ntilde;ana">Ma&ntilde;ana</option>
+                <option value="Tarde">Tarde</option>
+              </select>
+            </div>
+          </div>     
+            <div class="control-group">
+              <label class="control-label formulario" for="inputFormula">Formula:</label>
+              <div class="controls">
+                <select class="form-control" name="formula" required>
+                  <option value="">Seleccionar Formula</option>
+                  <?php
+                    $sqlFormula = "SELECT * FROM formulas ORDER BY tipo ASC, nombre ASC";
+                    $queryFromula = mysqli_query($conexion,$sqlFormula);
+                    $tipo = "";
+                    while ($filaForm = mysqli_fetch_array($queryFromula)) {
+                      if ($tipo != $filaForm['tipo']) { ?>
+                        <optgroup label="<?php echo $filaForm['tipo'];?>"></optgroup>
+                      <?php 
+                      } 
+                      ?>
+                      <option value="<?php echo $filaForm['id'];?>"><?php echo $filaForm['nombre'];?></option>
+                      
+                    <?php 
+                    $tipo = $filaForm['tipo'];
+                  }
+                  ?>
+                </select>
+              </div>
+            </div>  
+            <div class="control-group">
+              <label class="control-label formulario" for="inputKilos">Kilos:</label>
+              <div class="controls">
+                <input type="text" class="input-medium" id="inputKilos" name="kilos" required>
+              </div>
+            </div>          
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span12">
+            <button type="submit" class="btn btn-large btn-block btn-primary">Ingresar Registro</button>
+          </div>
+        </div>
     </form>
   </div>
-  <hr>
+  
   <div class="row-fluid">
       <div class="span12">
         <table class="table table-striped">

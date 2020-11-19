@@ -76,7 +76,6 @@ if( isset($_POST["submit"]) ){
 ;
 					mysqli_query($conexion,$sqlInsert);
 					echo mysqli_error($conexion);
-					die();
 				}
 
 			$contador++;

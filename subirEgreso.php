@@ -72,6 +72,23 @@ if(strtolower(end($chk_ext)) == "csv"){
 			$pesoTotal += $peso;
 			$notas = registroVacioString($data[2]);
 			$raza = registroVacioString($data[3]);
+
+			// GENERO ARRAY CON LAS RAZAS DE LA BASE DE DATOS
+			$arrayRazas = array();
+			$sqlRazas = "SELECT raza FROM razas ORDER BY raza ASC";
+			$queryRazas = mysqli_query($conexion,$sqlRazas);
+			while ($razas = mysqli_fetch_array($queryRazas)) {
+				$arrayRazas[] = $razas['raza'];
+			}
+			
+			if (!in_array($raza, $arrayRazas)) {
+				$nuevaRaza = $raza;
+				$sqlInsert = "INSERT INTO razas(raza) VALUES('$nuevaRaza')";
+				mysqli_query($conexion,$sqlInsert);
+			}
+
+
+
 			$sexo = registroVacioString($data[4]);
 			$proveedor = registroVacioString($data[5]);
 			$numeroDTE = registroVacioNumero($data[6]);
@@ -87,13 +104,6 @@ if(strtolower(end($chk_ext)) == "csv"){
 			$fecha = $fecha[2]."-".$fecha[1]."-".$fecha[0];
 
 			$hora = $data[13];
-			// echo $IDE."-".$peso."-".$notas."-".$raza."-".$sexo."-".$proveedor."-".$numeroDTE."-".$origen."-".$destino."-".$gdmTotal."-".$gpvTotal."-".$diasTotal."-".$fecha."-".$hora."<br>";
-
-			//$LID = registroVacioString($data[1]);
-			// $estadoTropa = registroVacioString($data[15]);
-			// $estado = registroVacioString($data[16]);
-			// $statusDate = registroVacioFecha($data[17]);
-			// $grupo = registroVacioString($data[18]);
 			
 			//Insertamos los datos con los valores...
 

@@ -16,11 +16,11 @@ $menu['Salir'] = 'logout.php';
                   if ($titulo == 'Raciones' OR $titulo == 'Salir') { ?>
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" style="font-size:20px;" 
-                      <?php
-                        if ($titulo == 'Raciones') {
-                          echo 'id="deshabilitado"';
-                        }
-                        ?>
+                       <?php
+                        // if ($titulo == 'Raciones') {
+                        //   echo 'id="deshabilitado"';
+                        // }
+                        ?> 
                        href="<?php echo $valor;?>"><b><?php echo $titulo; ?></b></a>
                     </li>
                   <?php }else{
@@ -52,10 +52,10 @@ $menu['Salir'] = 'logout.php';
 </div>
 <script> 
 
-var btnRaciones = document.getElementById('deshabilitado');
-btnRaciones.addEventListener('click', function(e){
-    e.preventDefault();
-});
+// var btnRaciones = document.getElementById('deshabilitado');
+// btnRaciones.addEventListener('click', function(e){
+//     e.preventDefault();
+// });
 
 </script>
 <div class="modal fade" id="modal-Stock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">

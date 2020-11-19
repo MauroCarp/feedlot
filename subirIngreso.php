@@ -90,7 +90,7 @@ if(strtolower(end($chk_ext)) == "csv"){
 					$sql = "INSERT INTO ingresos(feedlot,tropa,adpv,renspa,IDE,peso,raza,sexo,numDTE,origen,proveedor,notas,estadoAnimal,corral,fecha,hora) 
 					VALUES('$feedlot','$tropa','$adpv','$renspa','$IDE','$peso','$raza','$sexo','$numeroDTE','$origen','$proveedor','$notas','$estadoAnimal','$corral','$fecha','$hora')";
 					mysqli_query($conexion,$sql);// or die('<b>Error: Compuebe que el archivo este correcto.</b><br>Intente descargandolo nuevamente, y volviendolo a cargar en el sistema.<br>Para volver a la pagina anterior, click en la flecha ATRAS del navegador.');
-					// echo mysqli_error($conexion);
+					echo mysqli_error($conexion);
 					$totalAnimales++;
 				
 				}
@@ -101,7 +101,7 @@ if(strtolower(end($chk_ext)) == "csv"){
 		//cerramos la lectura del archivo "abrir archivo" con un "cerrar archivo"
 		$sql = "INSERT INTO status(feedlot,tropa,fechaIngreso,animales) VALUES('$feedlot','$tropa','$fecha','$totalAnimales')";
 		mysqli_query($conexion,$sql);
-		// echo mysqli_error($conexion);
+		echo mysqli_error($conexion);
 
 
 		$pesoProm = $pesoTotal / $totalAnimales;	
@@ -109,7 +109,7 @@ if(strtolower(end($chk_ext)) == "csv"){
 		$pesoProm =  number_format($pesoProm,2);
 		$sql = "INSERT INTO registroingresos(feedlot,tropa,fecha,cantidad,pesoPromedio,renspa,proveedor,estado,adpv) VALUES('$feedlot','$tropa','$fecha','$totalAnimales','$pesoProm','$renspa','$proveedor','$estadoAnimal','$adpv')";
 		mysqli_query($conexion,$sql);
-		// echo mysqli_error($conexion);
+		echo mysqli_error($conexion);
 		
 		fclose($handle);
 
@@ -120,7 +120,3 @@ if(strtolower(end($chk_ext)) == "csv"){
 	}
 
 ?>
-	<!-- <form name="f1" class="form-horizontal" method="POST" action="subirIngreso.php" enctype="multipart/form-data"> 
-		<input type="submit" class="btn btn-primary btn-lg" name="submit" value="Subir" />
-		<input type="file" name="file" required />
-	</form> -->
