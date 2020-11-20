@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 19-11-2020 a las 21:51:09
+-- Tiempo de generación: 20-11-2020 a las 18:12:39
 -- Versión del servidor: 10.4.10-MariaDB
 -- Versión de PHP: 7.3.12
 
@@ -237,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `ingresos` (
   `grupo` varchar(150) DEFAULT NULL,
   `caravanaValida` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ingresos`
@@ -269,7 +269,33 @@ INSERT INTO `ingresos` (`id`, `feedlot`, `tropa`, `adpv`, `renspa`, `LID`, `IDE`
 (23, 'Acopiadora Hoteleria', 'Ingreso fasano corral 21', 0, '', NULL, '982 126058228835', 317, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-09-16', '09:11:27', NULL, NULL, NULL, NULL, 0),
 (24, 'Acopiadora Hoteleria', 'Ingreso fasano corral 21', 0, '', NULL, '982 126058229461', 339, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-09-16', '09:11:40', NULL, NULL, NULL, NULL, 0),
 (25, 'Acopiadora Hoteleria', 'Ingreso fasano corral 21', 0, '', NULL, '982 126058229096', 355, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-09-16', '09:11:59', NULL, NULL, NULL, NULL, 0),
-(26, 'Acopiadora Hoteleria', 'Ingreso fasano corral 21', 0, '', NULL, '982 126058225135', 284, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-09-16', '09:12:16', NULL, NULL, NULL, NULL, 0);
+(26, 'Acopiadora Hoteleria', 'Ingreso fasano corral 21', 0, '', NULL, '982 126058225135', 284, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-09-16', '09:12:16', NULL, NULL, NULL, NULL, 0),
+(27, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058225418', 367, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '08:54:14', NULL, NULL, NULL, NULL, 0),
+(28, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058225563', 336, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '08:54:28', NULL, NULL, NULL, NULL, 0),
+(29, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058225078', 320, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '08:54:53', NULL, NULL, NULL, NULL, 0),
+(30, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058228853', 322, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '08:55:05', NULL, NULL, NULL, NULL, 0),
+(31, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126053808464', 370, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '08:55:24', NULL, NULL, NULL, NULL, 0),
+(32, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126053808447', 341, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '08:55:39', NULL, NULL, NULL, NULL, 0),
+(33, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058229391', 370, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '08:55:53', NULL, NULL, NULL, NULL, 0),
+(34, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058225152', 324, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '08:56:07', NULL, NULL, NULL, NULL, 0),
+(35, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126053808739', 354, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:02:20', NULL, NULL, NULL, NULL, 0),
+(36, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058225554', 324, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:03:31', NULL, NULL, NULL, NULL, 0),
+(37, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058229490', 362, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:03:51', NULL, NULL, NULL, NULL, 0),
+(38, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126053809619', 327, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:04:05', NULL, NULL, NULL, NULL, 0),
+(39, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058225038', 363, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:04:19', NULL, NULL, NULL, NULL, 0),
+(40, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058229100', 292, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:04:47', NULL, NULL, NULL, NULL, 0),
+(41, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058225206', 245, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:05:21', NULL, NULL, NULL, NULL, 0),
+(42, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126053792661', 326, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:05:34', NULL, NULL, NULL, NULL, 0),
+(43, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126053792551', 343, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:05:52', NULL, NULL, NULL, NULL, 0),
+(44, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058224941', 328, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:06:04', NULL, NULL, NULL, NULL, 0),
+(45, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058229904', 336, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:10:27', NULL, NULL, NULL, NULL, 0),
+(46, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126053809397', 370, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:10:41', NULL, NULL, NULL, NULL, 0),
+(47, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058225127', 331, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:10:55', NULL, NULL, NULL, NULL, 0),
+(48, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058228376', 337, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:11:07', NULL, NULL, NULL, NULL, 0),
+(49, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058228835', 317, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:11:27', NULL, NULL, NULL, NULL, 0),
+(50, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058229461', 339, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:11:40', NULL, NULL, NULL, NULL, 0),
+(51, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058229096', 355, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:11:59', NULL, NULL, NULL, NULL, 0),
+(52, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', 0, '', NULL, '982 126058225135', 284, 'Braford', 'Hembra', '9515', NULL, 'Regular', 'Vera santa fe', 'Fassano', '', '21', '2020-08-10', '09:12:16', NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -336,6 +362,7 @@ CREATE TABLE IF NOT EXISTS `mixer_cargas` (
   `ingrediente` varchar(150) DEFAULT NULL,
   `cantidad` int(10) DEFAULT NULL,
   `ideal` int(10) DEFAULT NULL,
+  `id_receta` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=latin1;
 
@@ -343,92 +370,92 @@ CREATE TABLE IF NOT EXISTS `mixer_cargas` (
 -- Volcado de datos para la tabla `mixer_cargas`
 --
 
-INSERT INTO `mixer_cargas` (`id`, `archivo`, `mixer`, `id_carga`, `fecha`, `hora`, `ingrediente`, `cantidad`, `ideal`) VALUES
-(1, 'mixer2.xlsx', 'mixer2', 0, '2020-06-15', '09:46:00', 'CascaraMani     ', 600, NULL),
-(2, 'mixer2.xlsx', 'mixer2', 0, '2020-06-15', '09:46:00', 'Maiz            ', 4560, NULL),
-(3, 'mixer2.xlsx', 'mixer2', 0, '2020-06-15', '09:46:00', 'Concentrado     ', 590, NULL),
-(4, 'mixer2.xlsx', 'mixer2', 1, '2020-06-15', '10:52:00', 'CascaraMani     ', 610, NULL),
-(5, 'mixer2.xlsx', 'mixer2', 1, '2020-06-15', '10:52:00', 'Maiz            ', 4700, NULL),
-(6, 'mixer2.xlsx', 'mixer2', 1, '2020-06-15', '10:52:00', 'Concentrado     ', 640, NULL),
-(7, 'mixer2.xlsx', 'mixer2', 1, '2020-06-15', '11:27:00', 'CascaraMani     ', 0, NULL),
-(8, 'mixer2.xlsx', 'mixer2', 1, '2020-06-15', '11:27:00', 'Maiz            ', 0, NULL),
-(9, 'mixer2.xlsx', 'mixer2', 1, '2020-06-15', '11:27:00', 'Concentrado     ', 0, NULL),
-(10, 'mixer2.xlsx', 'mixer2', 2, '2020-06-15', '11:54:00', 'CascaraMani     ', 600, NULL),
-(11, 'mixer2.xlsx', 'mixer2', 2, '2020-06-15', '11:54:00', 'Maiz            ', 4510, NULL),
-(12, 'mixer2.xlsx', 'mixer2', 2, '2020-06-15', '11:54:00', 'Concentrado     ', 630, NULL),
-(13, 'mixer2.xlsx', 'mixer2', 3, '2020-06-25', '10:58:00', 'CascaraMani     ', 590, NULL),
-(14, 'mixer2.xlsx', 'mixer2', 3, '2020-06-25', '10:58:00', 'Maiz            ', 4510, NULL),
-(15, 'mixer2.xlsx', 'mixer2', 3, '2020-06-25', '10:58:00', 'Concentrado     ', 610, NULL),
-(16, 'mixer2.xlsx', 'mixer2', 3, '2020-06-25', '11:28:00', 'CascaraMani     ', 10, NULL),
-(17, 'mixer2.xlsx', 'mixer2', 3, '2020-06-25', '11:28:00', 'Maiz            ', 0, NULL),
-(18, 'mixer2.xlsx', 'mixer2', 3, '2020-06-25', '11:28:00', 'Concentrado     ', 0, NULL),
-(19, 'mixer2.xlsx', 'mixer2', 4, '2020-06-25', '12:00:00', 'CascaraMani     ', 590, NULL),
-(20, 'mixer2.xlsx', 'mixer2', 4, '2020-06-25', '12:00:00', 'Maiz            ', 4520, NULL),
-(21, 'mixer2.xlsx', 'mixer2', 4, '2020-06-25', '12:00:00', 'Concentrado     ', 620, NULL),
-(22, 'mixer2.xlsx', 'mixer2', 4, '2020-06-25', '13:45:00', 'CascaraMani     ', 10, NULL),
-(23, 'mixer2.xlsx', 'mixer2', 4, '2020-06-25', '13:45:00', 'Maiz            ', 0, NULL),
-(24, 'mixer2.xlsx', 'mixer2', 4, '2020-06-25', '13:45:00', 'Concentrado     ', 0, NULL),
-(25, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:17:00', 'CascaraMani     ', 0, NULL),
-(26, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:17:00', 'Maiz            ', 0, NULL),
-(27, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:17:00', 'Concentrado     ', 0, NULL),
-(28, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:17:00', 'CascaraMani     ', 0, NULL),
-(29, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:17:00', 'Maiz            ', 0, NULL),
-(30, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:17:00', 'Concentrado     ', 0, NULL),
-(31, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:18:00', 'CascaraMani     ', 600, NULL),
-(32, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:18:00', 'Maiz            ', 4560, NULL),
-(33, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:18:00', 'Concentrado     ', 630, NULL),
-(34, 'mixer2.xlsx', 'mixer2', 6, '2020-07-02', '15:15:00', 'CascaraMani     ', 600, NULL),
-(35, 'mixer2.xlsx', 'mixer2', 6, '2020-07-02', '15:15:00', 'Maiz            ', 4500, NULL),
-(36, 'mixer2.xlsx', 'mixer2', 6, '2020-07-02', '15:15:00', 'Concentrado     ', 610, NULL),
-(37, 'mixer2.xlsx', 'mixer2', 7, '2020-07-02', '16:29:00', 'CascaraMani     ', 600, NULL),
-(38, 'mixer2.xlsx', 'mixer2', 7, '2020-07-02', '16:29:00', 'Maiz            ', 4540, NULL),
-(39, 'mixer2.xlsx', 'mixer2', 7, '2020-07-02', '16:29:00', 'Concentrado     ', 610, NULL),
-(40, 'mixer2.xlsx', 'mixer2', 8, '2020-07-08', '11:05:00', 'CascaraMani     ', 600, NULL),
-(41, 'mixer2.xlsx', 'mixer2', 8, '2020-07-08', '11:05:00', 'Maiz            ', 4530, NULL),
-(42, 'mixer2.xlsx', 'mixer2', 8, '2020-07-08', '11:05:00', 'Concentrado     ', 620, NULL),
-(43, 'mixer2.xlsx', 'mixer2', 9, '2020-07-08', '12:05:00', 'CascaraMani     ', 580, NULL),
-(44, 'mixer2.xlsx', 'mixer2', 9, '2020-07-08', '12:05:00', 'Maiz            ', 4530, NULL),
-(45, 'mixer2.xlsx', 'mixer2', 9, '2020-07-08', '12:05:00', 'Concentrado     ', 620, NULL),
-(46, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '12:58:00', 'CascaraMani     ', 590, NULL),
-(47, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '12:58:00', 'Maiz            ', 4540, NULL),
-(48, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '12:58:00', 'Concentrado     ', 610, NULL),
-(49, 'mixer2.xlsx', 'mixer2', 11, '2020-07-15', '10:26:00', 'CascaraMani     ', 610, NULL),
-(50, 'mixer2.xlsx', 'mixer2', 11, '2020-07-15', '10:26:00', 'Maiz            ', 4530, NULL),
-(51, 'mixer2.xlsx', 'mixer2', 11, '2020-07-15', '10:26:00', 'Concentrado     ', 600, NULL),
-(52, 'mixer2.xlsx', 'mixer2', 12, '2020-07-15', '12:01:00', 'CascaraMani     ', 610, NULL),
-(53, 'mixer2.xlsx', 'mixer2', 12, '2020-07-15', '12:01:00', 'Maiz            ', 4520, NULL),
-(54, 'mixer2.xlsx', 'mixer2', 12, '2020-07-15', '12:01:00', 'Concentrado     ', 610, NULL),
-(55, 'mixer2.xlsx', 'mixer2', 13, '2020-07-15', '16:13:00', 'CascaraMani     ', 630, NULL),
-(56, 'mixer2.xlsx', 'mixer2', 13, '2020-07-15', '16:13:00', 'Maiz            ', 4510, NULL),
-(57, 'mixer2.xlsx', 'mixer2', 13, '2020-07-15', '16:13:00', 'Concentrado     ', 620, NULL),
-(58, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '11:45:00', 'CascaraMani     ', 90, NULL),
-(59, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '11:45:00', 'Maiz            ', 0, NULL),
-(60, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '11:45:00', 'Concentrado     ', 0, NULL),
-(61, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '11:47:00', 'CascaraMani     ', 600, NULL),
-(62, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '11:47:00', 'Maiz            ', 4580, NULL),
-(63, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '11:47:00', 'Concentrado     ', 660, NULL),
-(64, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '14:44:00', 'CascaraMani     ', 0, NULL),
-(65, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '14:44:00', 'Maiz            ', 0, NULL),
-(66, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '14:44:00', 'Concentrado     ', 0, NULL),
-(67, 'mixer2.xlsx', 'mixer2', 15, '2020-07-22', '15:43:00', 'CascaraMani     ', 620, NULL),
-(68, 'mixer2.xlsx', 'mixer2', 15, '2020-07-22', '15:43:00', 'Maiz            ', 4520, NULL),
-(69, 'mixer2.xlsx', 'mixer2', 15, '2020-07-22', '15:43:00', 'Concentrado     ', 610, NULL),
-(70, 'mixer2.xlsx', 'mixer2', 16, '2020-07-22', '16:51:59', 'CascaraMani     ', 620, NULL),
-(71, 'mixer2.xlsx', 'mixer2', 16, '2020-07-22', '16:51:59', 'Maiz            ', 4520, NULL),
-(72, 'mixer2.xlsx', 'mixer2', 16, '2020-07-22', '16:51:59', 'Concentrado     ', 600, NULL),
-(73, 'mixer2.xlsx', 'mixer2', 17, '2020-07-29', '11:41:00', 'CascaraMani     ', 620, NULL),
-(74, 'mixer2.xlsx', 'mixer2', 17, '2020-07-29', '11:41:00', 'Maiz            ', 4500, NULL),
-(75, 'mixer2.xlsx', 'mixer2', 17, '2020-07-29', '11:41:00', 'Concentrado     ', 610, NULL),
-(76, 'mixer2.xlsx', 'mixer2', 18, '2020-07-29', '15:27:00', 'CascaraMani     ', 640, NULL),
-(77, 'mixer2.xlsx', 'mixer2', 18, '2020-07-29', '15:27:00', 'Maiz            ', 4510, NULL),
-(78, 'mixer2.xlsx', 'mixer2', 18, '2020-07-29', '15:27:00', 'Concentrado     ', 600, NULL),
-(79, 'mixer2.xlsx', 'mixer2', 19, '2020-07-29', '16:47:59', 'CascaraMani     ', 600, NULL),
-(80, 'mixer2.xlsx', 'mixer2', 19, '2020-07-29', '16:47:59', 'Maiz            ', 4520, NULL),
-(81, 'mixer2.xlsx', 'mixer2', 19, '2020-07-29', '16:47:59', 'Concentrado     ', 600, NULL),
-(82, 'mixer2.xlsx', 'mixer2', 20, '2020-09-29', '17:32:59', 'CascaraMani     ', 610, NULL),
-(83, 'mixer2.xlsx', 'mixer2', 20, '2020-09-29', '17:32:59', 'Agua            ', 250, NULL),
-(84, 'mixer2.xlsx', 'mixer2', 20, '2020-09-29', '17:32:59', 'Maiz            ', 4630, NULL),
-(85, 'mixer2.xlsx', 'mixer2', 20, '2020-09-29', '17:32:59', 'Concentrado     ', 610, NULL);
+INSERT INTO `mixer_cargas` (`id`, `archivo`, `mixer`, `id_carga`, `fecha`, `hora`, `ingrediente`, `cantidad`, `ideal`, `id_receta`) VALUES
+(1, 'mixer2.xlsx', 'mixer2', 0, '2020-06-15', '09:46:00', 'CascaraMani     ', 600, NULL, NULL),
+(2, 'mixer2.xlsx', 'mixer2', 0, '2020-06-15', '09:46:00', 'Maiz            ', 4560, NULL, NULL),
+(3, 'mixer2.xlsx', 'mixer2', 0, '2020-06-15', '09:46:00', 'Concentrado     ', 590, NULL, NULL),
+(4, 'mixer2.xlsx', 'mixer2', 1, '2020-06-15', '10:52:00', 'CascaraMani     ', 610, NULL, NULL),
+(5, 'mixer2.xlsx', 'mixer2', 1, '2020-06-15', '10:52:00', 'Maiz            ', 4700, NULL, NULL),
+(6, 'mixer2.xlsx', 'mixer2', 1, '2020-06-15', '10:52:00', 'Concentrado     ', 640, NULL, NULL),
+(7, 'mixer2.xlsx', 'mixer2', 1, '2020-06-15', '11:27:00', 'CascaraMani     ', 0, NULL, NULL),
+(8, 'mixer2.xlsx', 'mixer2', 1, '2020-06-15', '11:27:00', 'Maiz            ', 0, NULL, NULL),
+(9, 'mixer2.xlsx', 'mixer2', 1, '2020-06-15', '11:27:00', 'Concentrado     ', 0, NULL, NULL),
+(10, 'mixer2.xlsx', 'mixer2', 2, '2020-06-15', '11:54:00', 'CascaraMani     ', 600, NULL, NULL),
+(11, 'mixer2.xlsx', 'mixer2', 2, '2020-06-15', '11:54:00', 'Maiz            ', 4510, NULL, NULL),
+(12, 'mixer2.xlsx', 'mixer2', 2, '2020-06-15', '11:54:00', 'Concentrado     ', 630, NULL, NULL),
+(13, 'mixer2.xlsx', 'mixer2', 3, '2020-06-25', '10:58:00', 'CascaraMani     ', 590, NULL, NULL),
+(14, 'mixer2.xlsx', 'mixer2', 3, '2020-06-25', '10:58:00', 'Maiz            ', 4510, NULL, NULL),
+(15, 'mixer2.xlsx', 'mixer2', 3, '2020-06-25', '10:58:00', 'Concentrado     ', 610, NULL, NULL),
+(16, 'mixer2.xlsx', 'mixer2', 3, '2020-06-25', '11:28:00', 'CascaraMani     ', 10, NULL, NULL),
+(17, 'mixer2.xlsx', 'mixer2', 3, '2020-06-25', '11:28:00', 'Maiz            ', 0, NULL, NULL),
+(18, 'mixer2.xlsx', 'mixer2', 3, '2020-06-25', '11:28:00', 'Concentrado     ', 0, NULL, NULL),
+(19, 'mixer2.xlsx', 'mixer2', 4, '2020-06-25', '12:00:00', 'CascaraMani     ', 590, NULL, NULL),
+(20, 'mixer2.xlsx', 'mixer2', 4, '2020-06-25', '12:00:00', 'Maiz            ', 4520, NULL, NULL),
+(21, 'mixer2.xlsx', 'mixer2', 4, '2020-06-25', '12:00:00', 'Concentrado     ', 620, NULL, NULL),
+(22, 'mixer2.xlsx', 'mixer2', 4, '2020-06-25', '13:45:00', 'CascaraMani     ', 10, NULL, NULL),
+(23, 'mixer2.xlsx', 'mixer2', 4, '2020-06-25', '13:45:00', 'Maiz            ', 0, NULL, NULL),
+(24, 'mixer2.xlsx', 'mixer2', 4, '2020-06-25', '13:45:00', 'Concentrado     ', 0, NULL, NULL),
+(25, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:17:00', 'CascaraMani     ', 0, NULL, NULL),
+(26, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:17:00', 'Maiz            ', 0, NULL, NULL),
+(27, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:17:00', 'Concentrado     ', 0, NULL, NULL),
+(28, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:17:00', 'CascaraMani     ', 0, NULL, NULL),
+(29, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:17:00', 'Maiz            ', 0, NULL, NULL),
+(30, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:17:00', 'Concentrado     ', 0, NULL, NULL),
+(31, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:18:00', 'CascaraMani     ', 600, NULL, NULL),
+(32, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:18:00', 'Maiz            ', 4560, NULL, NULL),
+(33, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:18:00', 'Concentrado     ', 630, NULL, NULL),
+(34, 'mixer2.xlsx', 'mixer2', 6, '2020-07-02', '15:15:00', 'CascaraMani     ', 600, NULL, NULL),
+(35, 'mixer2.xlsx', 'mixer2', 6, '2020-07-02', '15:15:00', 'Maiz            ', 4500, NULL, NULL),
+(36, 'mixer2.xlsx', 'mixer2', 6, '2020-07-02', '15:15:00', 'Concentrado     ', 610, NULL, NULL),
+(37, 'mixer2.xlsx', 'mixer2', 7, '2020-07-02', '16:29:00', 'CascaraMani     ', 600, NULL, NULL),
+(38, 'mixer2.xlsx', 'mixer2', 7, '2020-07-02', '16:29:00', 'Maiz            ', 4540, NULL, NULL),
+(39, 'mixer2.xlsx', 'mixer2', 7, '2020-07-02', '16:29:00', 'Concentrado     ', 610, NULL, NULL),
+(40, 'mixer2.xlsx', 'mixer2', 8, '2020-07-08', '11:05:00', 'CascaraMani     ', 600, NULL, NULL),
+(41, 'mixer2.xlsx', 'mixer2', 8, '2020-07-08', '11:05:00', 'Maiz            ', 4530, NULL, NULL),
+(42, 'mixer2.xlsx', 'mixer2', 8, '2020-07-08', '11:05:00', 'Concentrado     ', 620, NULL, NULL),
+(43, 'mixer2.xlsx', 'mixer2', 9, '2020-07-08', '12:05:00', 'CascaraMani     ', 580, NULL, NULL),
+(44, 'mixer2.xlsx', 'mixer2', 9, '2020-07-08', '12:05:00', 'Maiz            ', 4530, NULL, NULL),
+(45, 'mixer2.xlsx', 'mixer2', 9, '2020-07-08', '12:05:00', 'Concentrado     ', 620, NULL, NULL),
+(46, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '12:58:00', 'CascaraMani     ', 590, NULL, NULL),
+(47, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '12:58:00', 'Maiz            ', 4540, NULL, NULL),
+(48, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '12:58:00', 'Concentrado     ', 610, NULL, NULL),
+(49, 'mixer2.xlsx', 'mixer2', 11, '2020-07-15', '10:26:00', 'CascaraMani     ', 610, NULL, NULL),
+(50, 'mixer2.xlsx', 'mixer2', 11, '2020-07-15', '10:26:00', 'Maiz            ', 4530, NULL, NULL),
+(51, 'mixer2.xlsx', 'mixer2', 11, '2020-07-15', '10:26:00', 'Concentrado     ', 600, NULL, NULL),
+(52, 'mixer2.xlsx', 'mixer2', 12, '2020-07-15', '12:01:00', 'CascaraMani     ', 610, NULL, NULL),
+(53, 'mixer2.xlsx', 'mixer2', 12, '2020-07-15', '12:01:00', 'Maiz            ', 4520, NULL, NULL),
+(54, 'mixer2.xlsx', 'mixer2', 12, '2020-07-15', '12:01:00', 'Concentrado     ', 610, NULL, NULL),
+(55, 'mixer2.xlsx', 'mixer2', 13, '2020-07-15', '16:13:00', 'CascaraMani     ', 630, NULL, NULL),
+(56, 'mixer2.xlsx', 'mixer2', 13, '2020-07-15', '16:13:00', 'Maiz            ', 4510, NULL, NULL),
+(57, 'mixer2.xlsx', 'mixer2', 13, '2020-07-15', '16:13:00', 'Concentrado     ', 620, NULL, NULL),
+(58, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '11:45:00', 'CascaraMani     ', 90, NULL, NULL),
+(59, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '11:45:00', 'Maiz            ', 0, NULL, NULL),
+(60, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '11:45:00', 'Concentrado     ', 0, NULL, NULL),
+(61, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '11:47:00', 'CascaraMani     ', 600, NULL, NULL),
+(62, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '11:47:00', 'Maiz            ', 4580, NULL, NULL),
+(63, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '11:47:00', 'Concentrado     ', 660, NULL, NULL),
+(64, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '14:44:00', 'CascaraMani     ', 0, NULL, NULL),
+(65, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '14:44:00', 'Maiz            ', 0, NULL, NULL),
+(66, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '14:44:00', 'Concentrado     ', 0, NULL, NULL),
+(67, 'mixer2.xlsx', 'mixer2', 15, '2020-07-22', '15:43:00', 'CascaraMani     ', 620, NULL, NULL),
+(68, 'mixer2.xlsx', 'mixer2', 15, '2020-07-22', '15:43:00', 'Maiz            ', 4520, NULL, NULL),
+(69, 'mixer2.xlsx', 'mixer2', 15, '2020-07-22', '15:43:00', 'Concentrado     ', 610, NULL, NULL),
+(70, 'mixer2.xlsx', 'mixer2', 16, '2020-07-22', '16:51:59', 'CascaraMani     ', 620, NULL, NULL),
+(71, 'mixer2.xlsx', 'mixer2', 16, '2020-07-22', '16:51:59', 'Maiz            ', 4520, NULL, NULL),
+(72, 'mixer2.xlsx', 'mixer2', 16, '2020-07-22', '16:51:59', 'Concentrado     ', 600, NULL, NULL),
+(73, 'mixer2.xlsx', 'mixer2', 17, '2020-07-29', '11:41:00', 'CascaraMani     ', 620, NULL, NULL),
+(74, 'mixer2.xlsx', 'mixer2', 17, '2020-07-29', '11:41:00', 'Maiz            ', 4500, NULL, NULL),
+(75, 'mixer2.xlsx', 'mixer2', 17, '2020-07-29', '11:41:00', 'Concentrado     ', 610, NULL, NULL),
+(76, 'mixer2.xlsx', 'mixer2', 18, '2020-07-29', '15:27:00', 'CascaraMani     ', 640, NULL, NULL),
+(77, 'mixer2.xlsx', 'mixer2', 18, '2020-07-29', '15:27:00', 'Maiz            ', 4510, NULL, NULL),
+(78, 'mixer2.xlsx', 'mixer2', 18, '2020-07-29', '15:27:00', 'Concentrado     ', 600, NULL, NULL),
+(79, 'mixer2.xlsx', 'mixer2', 19, '2020-07-29', '16:47:59', 'CascaraMani     ', 600, NULL, NULL),
+(80, 'mixer2.xlsx', 'mixer2', 19, '2020-07-29', '16:47:59', 'Maiz            ', 4520, NULL, NULL),
+(81, 'mixer2.xlsx', 'mixer2', 19, '2020-07-29', '16:47:59', 'Concentrado     ', 600, NULL, NULL),
+(82, 'mixer2.xlsx', 'mixer2', 20, '2020-09-29', '17:32:59', 'CascaraMani     ', 610, NULL, NULL),
+(83, 'mixer2.xlsx', 'mixer2', 20, '2020-09-29', '17:32:59', 'Agua            ', 250, NULL, NULL),
+(84, 'mixer2.xlsx', 'mixer2', 20, '2020-09-29', '17:32:59', 'Maiz            ', 4630, NULL, NULL),
+(85, 'mixer2.xlsx', 'mixer2', 20, '2020-09-29', '17:32:59', 'Concentrado     ', 610, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -446,7 +473,8 @@ CREATE TABLE IF NOT EXISTS `mixer_descargas` (
   `hora` time DEFAULT NULL,
   `lote` varchar(150) DEFAULT NULL,
   `cantidad` int(10) DEFAULT NULL,
-  `ideal` int(10) DEFAULT NULL,
+  `animales` int(10) DEFAULT NULL,
+  `operario` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
@@ -454,39 +482,39 @@ CREATE TABLE IF NOT EXISTS `mixer_descargas` (
 -- Volcado de datos para la tabla `mixer_descargas`
 --
 
-INSERT INTO `mixer_descargas` (`id`, `archivo`, `mixer`, `id_carga`, `fecha`, `hora`, `lote`, `cantidad`, `ideal`) VALUES
-(1, 'mixer2.xlsx', 'mixer2', 0, '2020-06-15', '10:26:00', 'Lote 2          ', 5890, NULL),
-(2, 'mixer2.xlsx', 'mixer2', 1, '2020-06-15', '11:29:00', 'Lote 2          ', 6030, NULL),
-(3, 'mixer2.xlsx', 'mixer2', 2, '2020-06-15', '12:31:00', 'Lote 2          ', 5840, NULL),
-(4, 'mixer2.xlsx', 'mixer2', 3, '2020-06-25', '11:30:00', 'Lote 2          ', 5730, NULL),
-(5, 'mixer2.xlsx', 'mixer2', 4, '2020-06-25', '13:45:00', 'Lote 2          ', 5760, NULL),
-(6, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:49:00', 'Lote 2          ', 5670, NULL),
-(7, 'mixer2.xlsx', 'mixer2', 6, '2020-07-02', '15:59:00', 'Lote 2          ', 5740, NULL),
-(8, 'mixer2.xlsx', 'mixer2', 7, '2020-07-02', '16:59:00', 'Lote 2          ', 5740, NULL),
-(9, 'mixer2.xlsx', 'mixer2', 8, '2020-07-08', '11:37:00', 'Lote 2          ', 5730, NULL),
-(10, 'mixer2.xlsx', 'mixer2', 9, '2020-07-08', '12:33:00', 'Lote 2          ', 5770, NULL),
-(11, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 2          ', 0, NULL),
-(12, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 2          ', 0, NULL),
-(13, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 3          ', 0, NULL),
-(14, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 4          ', 0, NULL),
-(15, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 5          ', 0, NULL),
-(16, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 6          ', 0, NULL),
-(17, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 7          ', 0, NULL),
-(18, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 8          ', 0, NULL),
-(19, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 9          ', 0, NULL),
-(20, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 2          ', 5730, NULL),
-(21, 'mixer2.xlsx', 'mixer2', 11, '2020-07-15', '11:02:00', 'Lote 2          ', 5750, NULL),
-(22, 'mixer2.xlsx', 'mixer2', 12, '2020-07-15', '14:35:59', 'Lote 2          ', 5670, NULL),
-(23, 'mixer2.xlsx', 'mixer2', 13, '2020-07-15', '17:06:00', 'Lote 2          ', 5750, NULL),
-(24, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '14:46:00', 'Lote 2          ', 5820, NULL),
-(25, 'mixer2.xlsx', 'mixer2', 15, '2020-07-22', '16:15:00', 'Lote 2          ', 5750, NULL),
-(26, 'mixer2.xlsx', 'mixer2', 16, '2020-07-22', '17:19:00', 'Lote 2          ', 5590, NULL),
-(27, 'mixer2.xlsx', 'mixer2', 17, '2020-07-29', '14:47:00', 'Lote 2          ', 5680, NULL),
-(28, 'mixer2.xlsx', 'mixer2', 18, '2020-07-29', '16:01:00', 'Lote 2          ', 5690, NULL),
-(29, 'mixer2.xlsx', 'mixer2', 19, '2020-07-29', '17:15:00', 'Lote 2          ', 5690, NULL),
-(30, 'mixer2.xlsx', 'mixer2', 20, '2020-09-29', '18:23:00', 'Lote 150        ', 50, NULL),
-(31, 'mixer2.xlsx', 'mixer2', 20, '2020-09-29', '18:23:00', 'Lote 150        ', 5890, NULL),
-(32, 'mixer2.xlsx', 'mixer2', 20, '2020-09-29', '18:23:00', 'Lote 151        ', 5870, NULL);
+INSERT INTO `mixer_descargas` (`id`, `archivo`, `mixer`, `id_carga`, `fecha`, `hora`, `lote`, `cantidad`, `animales`, `operario`) VALUES
+(1, 'mixer2.xlsx', 'mixer2', 0, '2020-06-15', '10:26:00', 'Lote 2          ', 5890, NULL, ''),
+(2, 'mixer2.xlsx', 'mixer2', 1, '2020-06-15', '11:29:00', 'Lote 2          ', 6030, NULL, ''),
+(3, 'mixer2.xlsx', 'mixer2', 2, '2020-06-15', '12:31:00', 'Lote 2          ', 5840, NULL, ''),
+(4, 'mixer2.xlsx', 'mixer2', 3, '2020-06-25', '11:30:00', 'Lote 2          ', 5730, NULL, ''),
+(5, 'mixer2.xlsx', 'mixer2', 4, '2020-06-25', '13:45:00', 'Lote 2          ', 5760, NULL, ''),
+(6, 'mixer2.xlsx', 'mixer2', 5, '2020-06-25', '14:49:00', 'Lote 2          ', 5670, NULL, ''),
+(7, 'mixer2.xlsx', 'mixer2', 6, '2020-07-02', '15:59:00', 'Lote 2          ', 5740, NULL, ''),
+(8, 'mixer2.xlsx', 'mixer2', 7, '2020-07-02', '16:59:00', 'Lote 2          ', 5740, NULL, ''),
+(9, 'mixer2.xlsx', 'mixer2', 8, '2020-07-08', '11:37:00', 'Lote 2          ', 5730, NULL, ''),
+(10, 'mixer2.xlsx', 'mixer2', 9, '2020-07-08', '12:33:00', 'Lote 2          ', 5770, NULL, ''),
+(11, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 2          ', 0, NULL, ''),
+(12, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 2          ', 0, NULL, ''),
+(13, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 3          ', 0, NULL, ''),
+(14, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 4          ', 0, NULL, ''),
+(15, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 5          ', 0, NULL, ''),
+(16, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 6          ', 0, NULL, ''),
+(17, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 7          ', 0, NULL, ''),
+(18, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 8          ', 0, NULL, ''),
+(19, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 9          ', 0, NULL, ''),
+(20, 'mixer2.xlsx', 'mixer2', 10, '2020-07-08', '13:25:00', 'Lote 2          ', 5730, NULL, ''),
+(21, 'mixer2.xlsx', 'mixer2', 11, '2020-07-15', '11:02:00', 'Lote 2          ', 5750, NULL, ''),
+(22, 'mixer2.xlsx', 'mixer2', 12, '2020-07-15', '14:35:59', 'Lote 2          ', 5670, NULL, ''),
+(23, 'mixer2.xlsx', 'mixer2', 13, '2020-07-15', '17:06:00', 'Lote 2          ', 5750, NULL, ''),
+(24, 'mixer2.xlsx', 'mixer2', 14, '2020-07-22', '14:46:00', 'Lote 2          ', 5820, NULL, ''),
+(25, 'mixer2.xlsx', 'mixer2', 15, '2020-07-22', '16:15:00', 'Lote 2          ', 5750, NULL, ''),
+(26, 'mixer2.xlsx', 'mixer2', 16, '2020-07-22', '17:19:00', 'Lote 2          ', 5590, NULL, ''),
+(27, 'mixer2.xlsx', 'mixer2', 17, '2020-07-29', '14:47:00', 'Lote 2          ', 5680, NULL, ''),
+(28, 'mixer2.xlsx', 'mixer2', 18, '2020-07-29', '16:01:00', 'Lote 2          ', 5690, NULL, ''),
+(29, 'mixer2.xlsx', 'mixer2', 19, '2020-07-29', '17:15:00', 'Lote 2          ', 5690, NULL, ''),
+(30, 'mixer2.xlsx', 'mixer2', 20, '2020-09-29', '18:23:00', 'Lote 150        ', 50, NULL, ''),
+(31, 'mixer2.xlsx', 'mixer2', 20, '2020-09-29', '18:23:00', 'Lote 150        ', 5890, NULL, ''),
+(32, 'mixer2.xlsx', 'mixer2', 20, '2020-09-29', '18:23:00', 'Lote 151        ', 5870, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -671,14 +699,15 @@ CREATE TABLE IF NOT EXISTS `registroingresos` (
   `estado` varchar(150) DEFAULT NULL,
   `proveedor` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `registroingresos`
 --
 
 INSERT INTO `registroingresos` (`id`, `feedlot`, `tropa`, `fecha`, `cantidad`, `pesoPromedio`, `renspa`, `adpv`, `estado`, `proveedor`) VALUES
-(1, 'Acopiadora Hoteleria', 'Ingreso fasano corral 21', '2020-09-16', 26, 333.96, '', 0, 'Regular', 'Fassano');
+(1, 'Acopiadora Hoteleria', 'Ingreso fasano corral 21', '2020-09-16', 26, 333.96, '', 0, 'Regular', 'Fassano'),
+(2, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', '2020-08-10', 26, 333.96, '', 0, 'Regular', 'Fassano');
 
 -- --------------------------------------------------------
 
@@ -755,14 +784,15 @@ CREATE TABLE IF NOT EXISTS `status` (
   `refuerzo` tinyint(1) NOT NULL DEFAULT 0,
   `notificado` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `status`
 --
 
 INSERT INTO `status` (`id`, `feedlot`, `tropa`, `fechaIngreso`, `animales`, `operario`, `operario1`, `operario2`, `operario3`, `procedimiento`, `fechaRealizado`, `fechaMetafilaxis`, `metafilaxis`, `fechaVacuna`, `vacuna`, `fechaRefuerzo`, `refuerzo`, `notificado`) VALUES
-(1, 'Acopiadora Hoteleria', 'Ingreso fasano corral 21', '2020-09-16', 26, NULL, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, 0, NULL, 0, 0);
+(1, 'Acopiadora Hoteleria', 'Ingreso fasano corral 21', '2020-09-16', 26, NULL, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, 0, NULL, 0, 0),
+(2, 'Acopiadora Hoteleria', 'Ingreso fasano corral 3', '2020-08-10', 26, NULL, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, 0, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
