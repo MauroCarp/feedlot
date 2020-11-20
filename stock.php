@@ -319,7 +319,6 @@ if ($seccionValido) {
   $seccion = '';
 }
 
-
 ?>
 
 <!DOCTYPE html>

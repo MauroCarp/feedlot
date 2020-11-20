@@ -375,12 +375,12 @@ if($feedlot == 'Acopiadora Pampeana'){
             $('#difAnimMuertos').html(difAnimMuertos + ' Animales');
           }
 
-          var porcentajeIng = ((difAnimalesIng * 100) / cantIng).toFixed(2);
-          var porcentajeEgr = ((difAnimalesEgr * 100) / cantEgr).toFixed(2);
-          var porcentajeMuertes = ((difAnimMuertos * 100) / cantMuertes).toFixed(2);
+          var porcentajeIng = ( cantIng != 0) ? ((difAnimalesIng * 100) / cantIng).toFixed(2) : 0;
+          var porcentajeEgr = ( cantEgr != 0) ? ((difAnimalesEgr * 100) / cantEgr).toFixed(2) : 0;
+          var porcentajeMuertes = ( cantMuertes != 0) ? ((difAnimMuertos * 100) / cantMuertes).toFixed(2) : 0;
 
           var dataIng = porcentajeIng;
-          var dataEgr = porcentajeEgr;
+          var dataEgr = porcentajeEgr;          
           var dataMuertes = porcentajeMuertes;
 
           if (cantIng < cantIngComp) {

@@ -271,9 +271,10 @@ $cantidadEgresos = 0;
         if ($kgEgrPromComp > $kgIngPromComp) {
             $diferenciaIngEgrComp = $kgEgrPromComp - $kgIngPromComp;  
           }
+          
     /// MUERTES 
 
-      $sqlMuertesComp = "SELECT SUM(muertes) as totalMuertes FROM muertes WHERE feedlot = '$feedlot' AND fecha BETWEEN '$desdeComp' AND '$hastaComp'";
+      $sqlMuertesComp = "SELECT COUNT(tropa) as totalMuertes FROM muertes WHERE feedlot = '$feedlot' AND fecha BETWEEN '$desdeComp' AND '$hastaComp'";
       $queryMuertesComp = mysqli_query($conexion,$sqlMuertesComp);
       $resultadoMuertesComp = mysqli_fetch_array($queryMuertesComp);
       $totalMuertesComp = $resultadoMuertesComp['totalMuertes'];

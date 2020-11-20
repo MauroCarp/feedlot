@@ -71,7 +71,7 @@
             $causasCant = array();
             foreach ($causas as $key => $value) {
               $keyCausa = $value;
-              $sql = "SELECT SUM(muertes) as cantidad FROM muertes WHERE feedlot = '$feedlot' AND causaMuerte = '$value'";
+              $sql = "SELECT COUNT(tropa) as cantidad FROM muertes WHERE feedlot = '$feedlot' AND causaMuerte = '$value'";
               $query = mysqli_query($conexion,$sql);
               echo mysqli_error($conexion);
               $resultado = mysqli_fetch_array($query);

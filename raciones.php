@@ -357,7 +357,6 @@ if ($accionValido) {
       $seccion = '';
     }
 
-
 ?>
 
 <!DOCTYPE html>
@@ -399,8 +398,7 @@ if ($accionValido) {
     <div class="container" style="padding-top: 50px;">
       <h1 style="display: inline-block;">Raciones</h1>
       <h4 style="display: inline-block;float: right;"><?php echo "Fecha: ".$fechaDeHoy;?></h4>
-      <hr>
-
+      <hr style="padding:0;margin-top:0;">
       <div class="hero-unit" style="padding-top: 10px;">
         <div class="bs-docs-example">
           <ul id="myTab" class="nav nav-tabs">
@@ -653,13 +651,13 @@ if ($accionValido) {
 
         });
 
-        
+
     </script>    
     <!-- Placed at the end of the document so the pages load faster -->
+
     <script src="js/functions.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/functions.js"></script>
-
     
   </body>
 </html>

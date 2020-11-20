@@ -213,10 +213,13 @@ function traerNombreInsumo($id,$conexion){
 }
 
 function paginador($seccion,$feedlot,$conexion){
-	$sql = "SELECT COUNT(tropa) as cantidad FROM $seccion WHERE feedlot = '$feedlot'";
+
+	$sql = "SELECT COUNT(*) as cantidad FROM $seccion WHERE feedlot = '$feedlot'";
+
 	if ($seccion == 'muertes') {
 		$sql = "SELECT COUNT(*) as cantidad FROM $seccion WHERE feedlot = '$feedlot'";
 	}
+	
 	$query = mysqli_query($conexion,$sql);
 	$fila = mysqli_fetch_array($query);
 	$totalRegistros = $fila['cantidad'];

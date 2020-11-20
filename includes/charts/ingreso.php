@@ -230,7 +230,7 @@ if(!$comparacionValido){
 		        $contador = 0;
 		        $cantidad = 0;
 		        $sqlIngresos = "SELECT * FROM ingresos WHERE feedlot = '$feedlot' AND fecha BETWEEN '$desde' AND '$hasta' ORDER BY fecha ASC";
-		        $queryIngresos = mysqli_query($conexion,$sqlIngresos);
+				$queryIngresos = mysqli_query($conexion,$sqlIngresos);
 		        while ($filaIngresos = mysqli_fetch_array($queryIngresos)) {
 
 		          if($fechaTemp != $filaIngresos['fecha']){
@@ -243,7 +243,7 @@ if(!$comparacionValido){
 		        }
 		        $cantidad = $cantidad.",".$contador;
 
-		         $labels = substr($labels,2);
+				 $labels = substr($labels,2);
 				if ($labels == "") {
 					echo $labels;
 				}else{
@@ -391,30 +391,51 @@ if(!$comparacionValido){
 
 	        <?php
 	      	if ($labelsMeses) {
+
 				echo implode(",",$mesesComp);
+
 		      	}else{
-		        $labelsComp = "";
-		        $fechaTempComp = "";
-		        $contadorComp = 0;
-		        $cantidadComp = 0;
-		        $sqlIngresosComp = "SELECT * FROM ingresos WHERE feedlot = '$feedlot' AND fecha BETWEEN '$desdeComp' AND '$hastaComp' ORDER BY fecha ASC";
-		        $queryIngresosComp = mysqli_query($conexion,$sqlIngresosComp);
-		        while ($filaIngresosComp = mysqli_fetch_array($queryIngresosComp)) {
 
-		          if($fechaTempComp != $filaIngresosComp['fecha']){
-		            $fechaTempComp = $filaIngresosComp['fecha'];
-		            $labelsComp = $labelsComp."','".formatearFecha($fechaTempComp);
-		            $cantidadComp = $cantidadComp.",".$contadorComp;
-		            $contadorComp = 0;
-		          }
-		          $contadorComp++;
-		        }
-		        $cantidadComp = $cantidadComp.",".$contadorComp;
+					$labelsComp = "''";
+					
+					$fechaTempComp = "";
+					
+					$contadorComp = 0;
+					
+					$cantidadComp = 0;
+					
+					$sqlFechasComp = "SELECT DISTINCT(fecha) as fecha FROM ingresos WHERE feedlot = '$feedlot' AND fecha BETWEEN '$desdeComp' AND '$hastaComp' ORDER BY fecha ASC";
 
-		        echo substr($labelsComp,2)."'";
+					$queryFechasComp = mysqli_query($conexion,$sqlFechasComp);
+					
+					
+					
+					if (!empty($filaFechasComp)) {
+					
+					  
+					  while($filaFechasComp = mysqli_fetch_array($queryFechasComp)){
+					
+						$fecha = $filaFechasComp['fecha'];
+					  
+						$sqlCantidadComp = "SELECT COUNT(*) as total FROM ingresos WHERE feedlot = '$feedlot' AND fecha = '$fecha' ORDER BY fecha ASC";
+					  
+						$queryCantidadComp = mysqli_query($conexion,$sqlCantidadComp);
+					  
+						$resultado = mysqli_fetch_array($queryCantidadComp);
+					  
+						$labelsComp = $labelsComp.','.$resultado['total'];
+					  
+					  };
+					
+					
+					
+					
+					}
+
+					echo $labelsComp;
 		    	}
 		        ?>
-
+				
 	        ],
 	        datasets: [{
 	          label: 'Cantidad de Animales por Fecha de Ingresos',

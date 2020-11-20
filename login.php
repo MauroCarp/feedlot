@@ -89,7 +89,7 @@ if( $seEnvioInfo ) {
 
   <body class="text-center">
     <form class="form-signin">
-      <img class="mb-4" src="img/logo.png" alt="" width="300" height="">
+      <img class="mb-4" src="img/logoAcopiadora.jpg" alt="" width="300" height="">
       <h4 class="h3 mb-3 font-weight-ligth">Seleccione Feedlot</h4>
       <select class="form-control" name="feedlot" required autofocus>
         <?php

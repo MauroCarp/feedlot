@@ -55,28 +55,49 @@ if(!$comparacionValido){
 				datasets: [{
 					data: [
 					<?php
+
 					$cantMuertes = 0;
+
 					$labelsMuertes = "";
+
 					$colores = "";
+
 					$sqlTipo = "SELECT DISTINCT causaMuerte FROM muertes WHERE feedlot = '$feedlot' AND fecha BETWEEN '$desde' AND '$hasta' ORDER BY causaMuerte ASC";
+
 					$queryTipo = mysqli_query($conexion,$sqlTipo);
+
+
 					if (mysqli_num_rows($queryTipo)) {
+
 						$cantMuertes = array();
+
 						$labelsMuertes = array();
+
 						$colores = array();
+
 						while($resultadoTipo = mysqli_fetch_array($queryTipo)){
+
 							$causa = $resultadoTipo['causaMuerte'];
-							$sql = "SELECT SUM(muertes) as muertes FROM muertes WHERE feedlot = '$feedlot' AND causaMuerte = '$causa' AND fecha BETWEEN '$desde' AND '$hasta'";
+
+							$sql = "SELECT COUNT(tropa) as muertes FROM muertes WHERE feedlot = '$feedlot' AND causaMuerte = '$causa' AND fecha BETWEEN '$desde' AND '$hasta'";
+
 							$query = mysqli_query($conexion,$sql);
+
 							$cantidad = mysqli_fetch_array($query);
+
 							$colores[] = "'".color_rand()."'";
+
 							$labelsMuertes[] = "'".$causa."'";
+
 							$cantMuertes[] = $cantidad['muertes'];
 						}
 
 						$labelsMuertes = implode(',',$labelsMuertes);
+
 						$cantMuertes = implode(',',$cantMuertes);
+
 						$colores = implode(',',$colores);
+
 					}
 					echo $cantMuertes;
 					?>
@@ -191,26 +212,51 @@ if(!$comparacionValido){
 					data: [
 					<?php
 					$cantMuertes = 0;
-		            $labelsMuertes = "";
-		            $colores = "";
+
+					$labelsMuertes = "";
+					
+					$colores = "";
+
+					$coloresComp = '';
+					
 					$sqlTipoComp = "SELECT DISTINCT causaMuerte FROM muertes WHERE feedlot = '$feedlot' AND fecha BETWEEN '$desdeComp' AND '$hastaComp' ORDER BY causaMuerte ASC";
+
 					$queryTipoComp = mysqli_query($conexion,$sqlTipoComp);
+
+					$cantMuertesComp = array();
+
+					$labelsMuertesComp = array();
+
 					if (mysqli_num_rows($queryTipoComp)) {
-						$cantMuertesComp = array();
-						$labelsMuertesComp = array();
+
+
 						while($resultadoTipoComp = mysqli_fetch_array($queryTipoComp)){
+
 							$causaComp = $resultadoTipoComp['causaMuerte'];
-							$sqlComp = "SELECT SUM(muertes) as muertes FROM muertes WHERE feedlot = '$feedlot' AND causaMuerte = '$causaComp' AND fecha BETWEEN '$desdeComp' AND '$hastaComp'";
+
+							$sqlComp = "SELECT COUNT(tropa) as muertes FROM muertes WHERE feedlot = '$feedlot' AND causaMuerte = '$causaComp' AND fecha BETWEEN '$desdeComp' AND '$hastaComp'";
+
 							$queryComp = mysqli_query($conexion,$sqlComp);
+
 							$cantidadComp = mysqli_fetch_array($queryComp);
+
 							$coloresComp[] = "'".color_rand()."'";
+
 							$labelsMuertesComp[] = "'".$causaComp."'";
+
 							$cantMuertesComp[] = $cantidadComp['muertes'];
+
 						}
 
 						$labelsMuertesComp = implode(',',$labelsMuertesComp);
 						$cantMuertesComp = implode(',',$cantMuertesComp);
 						$coloresComp = implode(',',$coloresComp);
+					
+					}else{
+
+						$labelsMuertesComp = '';
+						$cantMuertesComp = 0;
+
 					}
 
 					echo $cantMuertesComp;
@@ -243,7 +289,7 @@ if(!$comparacionValido){
 			}
 		};
   
-	// INGRESOS COMPARACION 
+	// MUERTES COMPARACION 
 			var muertesComp = {
 	      type: 'line',
 	      data: {
@@ -253,7 +299,7 @@ if(!$comparacionValido){
 	      	
 	        $labelsMuertesComp = "";
 			$cantidadMuertesComp = 0;
-			$sqlMuertesComp = "SELECT fecha,muertes,causaMuerte FROM muertes WHERE feedlot = '$feedlot' AND fecha BETWEEN '$desdeComp' AND '$hastaComp' ORDER BY fecha ASC";
+			$sqlMuertesComp = "SELECT fecha,COUNT(tropa) as muertes,causaMuerte FROM muertes WHERE feedlot = '$feedlot' AND fecha BETWEEN '$desdeComp' AND '$hastaComp' ORDER BY fecha ASC";
 			$queryMuertesComp = mysqli_query($conexion,$sqlMuertesComp);
 			while ($filaMuertesComp = mysqli_fetch_array($queryMuertesComp)) {
 				$cantidadMuertesComp = $cantidadMuertesComp.",".$filaMuertesComp['muertes'];
