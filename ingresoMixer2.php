@@ -311,6 +311,9 @@ if( isset($_POST["submit"]) ){
         
     }
 
+    unlink($ruta);
+
+    
     echo '<script>
 				window.location = "raciones.php";
 

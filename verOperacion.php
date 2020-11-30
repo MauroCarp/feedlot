@@ -14,26 +14,30 @@ if($tipo == 'Carga'){
     
     $tabla = 'mixer_cargas';
     
-    $columna5 = 'Receta';
+    $columna5 = 'Ideal';
     
-    $columna6 = 'Ideal';
+    $columna6 = 'Receta';
+    
+    $order = 'hora ASC';
     
     
+  }else{
     
-}else{
-
     $ingredienteLote = 'lote';
-
+    
     $tabla = 'mixer_descargas';
-
+    
     $columna5 = 'Cant. Animales';
-
+    
     $columna6 = 'Operario';
-
+    
+    $order = 'hora ASC, lote ASC';
 
 }
-$sql = "SELECT * FROM $tabla WHERE fecha = '$fecha' ORDER BY mixer ASC, hora ASC";
+
+$sql = "SELECT * FROM $tabla WHERE fecha = '$fecha' ORDER BY $order";
 $query = mysqli_query($conexion,$sql);
+echo mysqli_error($conexion);
 
 ?>
 
@@ -88,83 +92,137 @@ $query = mysqli_query($conexion,$sql);
       <h4 style="display: inline-block;float: right;"><?php echo "Fecha: ".$fechaDeHoy;?></h4>
       <div class="hero-unit" style="padding-top: 10px;margin-bottom: 5px;">
         <h2>Fecha y Tipo de Operación <?php echo formatearFecha($fecha).' - '.$tipo;?></h2>
-        <h5></h5>
-        <table class="table table-striped">
+
+        <form class="well form-inline">
+
+          <label>Mixer</label>
+
+          <select name="mixer" id="mixer" class="input-small">
+
+            <option value="">Seleccionar Mixer</option>
             
-            <thead>
-                                
-                <th>N°</th>
+            <option value="mixer1">456ST</option>
 
-                <th>Mixer</th>
+            <option value="mixer2">Mixer 2</option>
 
-                <th>Fecha</th>
-                
-                <th>Hora</th>
-                
-                <th><?php echo ucfirst($ingredienteLote);?></th>
-                
-                <th>Cantidad</th>
-                
-                <th><?php echo $columna5;?></th>
-                
-                <th><?php echo $columna6;?></th>
+          </select>
+          
 
-            </thead>
+          <label>Carga/Descarga</label>
 
-            <tbody>
-            <?php
-                $cont = 1;
+          <select name="tipo" id="tipo" class="input-medium">
 
-                while($resultado = mysqli_fetch_array($query)){ 
-                    
-                    $mixer = ($resultado['mixer'] == 'mixer1') ? '456ST' : 'Mixer 2';
+            <option value="cargaDescarga">Cargas/Descargas</option>
+            
+            <option value="carga">Cargas</option>
 
-                ?>
-                <tr>
-                
-                    <td><?php echo $cont;?></td>
+            <option value="descarga">Descargas</option>
 
-                    <td><?php echo $mixer;?></td>
-                
-                    <td><?php echo $resultado['fecha'];?></td>
+          </select>
+          
 
-                    <td><?php echo $resultado['hora'];?></td>
+          <label class="lotes">Lotes</label>
 
-                    <td><?php echo $resultado[$ingredienteLote];?></td>
+          <select multiple="multiple" id="Lotes" size="3" class="lotes">
+          <?php
+          if($tipo == 'Descarga'){
+            $sqlLotes = "SELECT DISTINCT(lote) FROM $tabla WHERE fecha = '$fecha' ORDER BY lote ASC";
+            $queryLotes = mysqli_query($conexion,$sqlLotes);
 
-                    <td><?php echo $resultado['cantidad'].' Kg';?></td>
+            while($lote = mysqli_fetch_array($queryLotes)){
 
-                <?php
-                    if($tipo == 'Carga'){ ?>
+              $loteNum = $lote['lote'];
 
-                        <td><?php echo $resultado['ideal'];?></td>
-    
-                        <td><?php echo $resultado['id_receta'];?></td>
-                    
-                    <?php
-                    
-                    }else{ ?>
-                        
-                        <td><?php echo $resultado['animales'];?></td>
-    
-                        <td><?php echo $resultado['operario'];?></td>
-                    
-                    <?php
-                    
-                    }
+              echo "<option value='$loteNum'>$loteNum</option>";
 
-                    ?>
-                    
-                </tr>
+            }
+          }
+          ?>
 
-            <?php
-                $cont++;
-                }
+          </select>
 
-            ?>
-            </tbody>
-        
-        </table>
+
+          <button type="submit" class="btn" id='filtrar'>Filtrar</button>
+      
+        </form>
+        <div style="height:500px;overflow-y:scroll;margin-bottom:15px">
+          <table class="table table-striped">
+              
+              <thead>
+                                  
+                  <th>N°</th>
+
+                  <th>Mixer</th>
+
+                  <th>Fecha</th>
+                  
+                  <th>Hora</th>
+                  
+                  <th><?php echo ucfirst($ingredienteLote);?></th>
+                  
+                  <th>Cantidad</th>
+                  
+                  <th><?php echo $columna5;?></th>
+                  
+                  <th><?php echo $columna6;?></th>
+
+              </thead>
+
+              <tbody>
+              <?php
+                  $cont = 1;
+
+                  while($resultado = mysqli_fetch_array($query)){ 
+                      
+                      $mixer = ($resultado['mixer'] == 'mixer1') ? '456ST' : 'Mixer 2';
+
+                  ?>
+                  <tr>
+                  
+                      <td><?php echo $cont;?></td>
+
+                      <td><?php echo $mixer;?></td>
+                  
+                      <td><?php echo formatearFecha($resultado['fecha']);?></td>
+
+                      <td><?php echo $resultado['hora'];?></td>
+
+                      <td><?php echo $resultado[$ingredienteLote];?></td>
+
+                      <td><?php echo $resultado['cantidad'].' Kg';?></td>
+
+                  <?php
+                      if($tipo == 'Carga'){ ?>
+
+                          <td><?php echo $resultado['ideal'].' Kg';?></td>
+      
+                          <td><?php echo $resultado['id_receta'];?></td>
+                      
+                      <?php
+                      
+                      }else{ ?>
+                          
+                          <td><?php echo $resultado['animales'];?></td>
+      
+                          <td><?php echo ucfirst($resultado['operario']);?></td>
+                      
+                      <?php
+                      
+                      }
+
+                      ?>
+                      
+                  </tr>
+
+              <?php
+                  $cont++;
+                  }
+
+              ?>
+              </tbody>
+          
+          </table>
+        </div>
 
         <a href="raciones.php" class="btn btn-primary">Volver</a>
 
@@ -179,10 +237,26 @@ $query = mysqli_query($conexion,$sql);
 
     $(function () {
 
-        console.log('prueba');
-        
+      $('.lotes').css('display','none');
+
+      $('#tipo').change(function(){
+          
+        if($(this).val() == 'descarga'){
+          
+          $('.lotes').css('display','inline-block');
+
+        }else{
+
+          $('.lotes').css('display','none');
+
+        }
+
+      });
+
         
     });
+
+
 
    </script>
 

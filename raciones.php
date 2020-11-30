@@ -82,9 +82,31 @@ if ($accionValido) {
   }
 
   if ($accion == 'eliminar') {
-    $id = $_GET['id'];
-    $sqlEliminar = "DELETE FROM raciones WHERE id = '$id'";
-    $queryEliminar = mysqli_query($conexion,$sqlEliminar);
+
+    if (isset($_GET['archivo'])) {
+      
+      $archivo = $_GET['archivo'];
+
+      $sql = "DELETE FROM mixer_cargas WHERE archivo = '$archivo'";
+
+      mysqli_query($conexion,$sql);
+
+      $sql = "DELETE FROM mixer_descargas WHERE archivo = '$archivo'";
+
+      mysqli_query($conexion,$sql);
+      
+      $sql = "DELETE FROM mixer_recetas WHERE archivo = '$archivo'";
+
+      mysqli_query($conexion,$sql);
+      
+    }else{
+
+      
+      $id = $_GET['id'];
+      $sqlEliminar = "DELETE FROM raciones WHERE id = '$id'";
+      $queryEliminar = mysqli_query($conexion,$sqlEliminar);
+      
+    }
 
     header("Location:raciones.php?seccion=ingreso");
   }
