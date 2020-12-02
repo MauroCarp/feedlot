@@ -11,21 +11,21 @@ function validateDate($fecha){
 
 	$fechaValida = (sizeof($fecha) == 3) ? TRUE : FALSE;
                         
-	// $fecha = ($fechaValida) ? $fecha[2].'-'.$fecha[1].'-'.$fecha[0] : '0000-00-00';
-
 	return $fechaValida;
 
 }
 
-// function formatearFecha(){
-	
-// 	$fecha = explode('/',$fecha);
+function fechaMysql($fecha){
 
-                        
-// 	$fecha = $fecha[2].'-'.$fecha[1].'-'.$fecha[0];
+	$fecha = explode('/',$fecha);
 
-// 	return $fecha;
-// }
+	$fecha = $fecha[2].'-'.$fecha[1].'-'.$fecha[0];
+
+	return $fecha;
+}
+
+$arrayHojas = array(0=>'Recetas',4=>'Cargas',5=>'Descargas');
+
 
 if( isset($_POST["submit"]) ){
 
@@ -172,12 +172,12 @@ if( isset($_POST["submit"]) ){
 
 						if($fechaValida){
 
-							$fecha = formatearFecha($fecha);
+							$fecha = fechaMysql($fecha);
 						
 						}else{
 
 							echo "<script>
-								alert('Hay una o más fechas con un formato erroneo');
+								alert('Hay un formato erroneo o vacío en la columna FECHA de la hoja de $arrayHojas[$i]');
 								window.location = 'raciones.php?accion=eliminar&archivo=".$archivo."';
 							</script>";
 							
@@ -267,15 +267,18 @@ if( isset($_POST["submit"]) ){
                         $fecha = mysqli_real_escape_string($conexion,$Row[1]);
                         
 						$fechaValida = validateDate($fecha);
-
 						if($fechaValida){
-
-							$fecha = formatearFecha($fecha);
-						
+							
+							$fecha = fechaMysql($fecha);
+							
 						}else{
-
+							
 							echo "<script>
-								alert('Hay una o más horas con un formato erroneo o vacío');
+							
+							alert('Hay un formato erroneo o vacío en la columna FECHA de la hoja de $arrayHojas[$i]');
+							
+							window.location = 'raciones.php?accion=eliminar&archivo=".$archivo."';
+							
 							</script>";
 							
 						}
@@ -290,7 +293,7 @@ if( isset($_POST["submit"]) ){
 						$hora = mysqli_real_escape_string($conexion,$Row[2]);
 
 						$horaValida = preg_match('/([0-9][0-9])(:)([0-9][0-9])/',$hora);
-						
+
 						if($horaValida){
 
 							$hora = $hora.':00';
@@ -298,9 +301,13 @@ if( isset($_POST["submit"]) ){
 						}else{
 
 							echo "<script>
-								alert('Hay una o más horas con un formato erroneo o vacío');
-							</script>";
-
+								
+								alert('Hay formato erroneo o vacío en la columna HORA de la hoja de $arrayHojas[$i]');
+								
+								window.location = 'raciones.php?accion=eliminar&archivo=".$archivo."';
+								
+								</script>";
+								
 						}
 						
 					}
@@ -316,8 +323,12 @@ if( isset($_POST["submit"]) ){
 						if(!$loteValido){
 
 							echo "<script>
-								alert('Hay una o más horas con un formato erroneo o vacío');
-							</script>";
+								
+								alert('Hay un formato erroneo o vacío en la la columna LOTE de la hoja de $arrayHojas[$i]');
+								
+								window.location = 'raciones.php?accion=eliminar&archivo=".$archivo."';
+								
+								</script>";
 
 						}
 						
@@ -344,8 +355,12 @@ if( isset($_POST["submit"]) ){
 						if(!$animalesValido){
 
 							echo "<script>
-								alert('Hay una o más horas con un formato erroneo o vacío');
-							</script>";
+								
+							alert('Hay un formato erroneo o vacío en la columna ANIMALES de la hoja de $arrayHojas[$i]');
+								
+							window.location = 'raciones.php?accion=eliminar&archivo=".$archivo."';
+							
+							script>";
 
 						}
 
@@ -362,7 +377,7 @@ if( isset($_POST["submit"]) ){
 					
 					
 					
-					$sql = "INSERT INTO mixer_descargas(archivo,mixer,id_descarga,id_carga,fecha,hora,lote,cantidad,animales,operario) VALUES ('$archivo','mixer1','$id_descarga','$id_carga','$fecha','$horaFormateada','$lote','$cantidad','$animales','$operario')";
+					$sql = "INSERT INTO mixer_descargas(archivo,mixer,id_descarga,id_carga,fecha,hora,lote,cantidad,animales,operario) VALUES ('$archivo','mixer1','$id_descarga','$id_carga','$fecha','$hora','$lote','$cantidad','$animales','$operario')";
 
                     mysqli_query($conexion,$sql);	
                     

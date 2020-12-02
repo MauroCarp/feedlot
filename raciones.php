@@ -669,6 +669,13 @@ if ($accionValido) {
 
             $('form').attr('action','ingresoMixer2.php');
 
+          }else{
+
+            $('form').attr('action','ingresoMixer1.php');
+
+            $('#mixer2cantidad').css('display','none');
+
+
           }
 
         });
