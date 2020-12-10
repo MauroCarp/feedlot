@@ -390,9 +390,12 @@ if ($accionValido) {
     <link rel="shortcut icon" href="#" type="image/x-icon"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/jquery-2.2.4.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+
+
     <style type="text/css">
       body {
         padding-top: 60px;

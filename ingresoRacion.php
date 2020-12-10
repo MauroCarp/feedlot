@@ -1,6 +1,6 @@
 <div class="row-fluid">
 
-      <div class="span5" style="padding-right:15px;border-right: solid 1px black">
+      <div class="span5" style="padding-right:25px;border-right: solid 1px black">
 
         <form method="POST" class="form-horizontal" action="ingresoMixer1.php" enctype="multipart/form-data">              
           
@@ -96,7 +96,7 @@
 
             $fechaOperaciones = array();
 
-            $sqlCargas = "SELECT DISTINCT(fecha) as fecha FROM mixer_cargas ORDER BY fecha ASC";
+            $sqlCargas = "SELECT DISTINCT(fecha) as fecha FROM mixer_cargas ORDER BY fecha DESC";
             
             $queryCargas = mysqli_query($conexion,$sqlCargas);
             
@@ -123,38 +123,88 @@
             $fechaOperaciones = array_unique($fechaOperaciones);
             $fechaOperaciones = array_values($fechaOperaciones);
 
-            for ($i=0; $i < sizeof($fechaOperaciones) ; $i++) { 
-
-
-              echo "
-              <tr>
-
-                <td>".($i+1)."</td>
-                
-                <td>".formatearFecha($fechaOperaciones[$i])."</td>
-
-                <td>
-
-                  <a href='verOperacion.php?fecha=".$fechaOperaciones[$i]."'>
-                  
-                    <span class='icon-eye iconos' style='cursor:pointer;'></span>
-                  
-                  </a>
-                
-                </td>
-
-              </tr>";
-            
-            }
-              
             ?>
 
 
 
 
-          </tbody>
-        </table>
-      
+        
+        <?php
+
+        $num_items_by_page = 7;
+        $total_rows = sizeof($fechaOperaciones);
+
+        if ($total_rows > 0) {
+
+            $page = false;
+        
+            //examino la pagina a mostrar y el inicio del registro a mostrar
+            if (isset($_GET["page"])) {
+                $page = $_GET["page"];
+            }
+        
+            if (!$page) {
+                $start = 0;
+                $page = 1;
+            } else {
+                $start = ($page - 1) * $num_items_by_page;
+            }
+            //calculo el total de paginas
+            $total_pages = ceil($total_rows / $num_items_by_page);
+        
+            for ($a=$start; $a < ($start + $num_items_by_page) ; $a++) { 
+
+              if(isset($fechaOperaciones[$a])){
+               
+                echo "
+                <tr>
+
+                  <td>".($a+1)."</td>
+                  
+                  <td>".formatearFecha($fechaOperaciones[$a])."</td>
+
+                  <td>
+
+                    <a href='verOperacion.php?fecha=".$fechaOperaciones[$a]."'>
+                    
+                      <span class='icon-eye iconos' style='cursor:pointer;'></span>
+                    
+                    </a>
+                  
+                  </td>
+
+                </tr>";
+              
+              }
+            }
+            echo "</tbody></table>";
+
+            //pongo el numero de registros total, el tamano de pagina y la pagina que se muestra
+            echo '<ul class="pagination">';
+        
+            if ($total_pages > 1) {
+                if ($page != 1) {
+                    echo '<li class="page-item"><a class="page-link" href="raciones.php?page='.($page-1).'"><span aria-hidden="true">&laquo;</span></a></li>';
+                }
+        
+                for ($i=1;$i<=$total_pages;$i++) {
+                    if ($page == $i) {
+                        echo '<li class="page-item active"><a class="page-link" href="#">'.$page.'</a></li>';
+                    } else {
+                        echo '<li class="page-item"><a class="page-link" href="raciones.php?page='.$i.'">'.$i.'</a></li>';
+                    }
+                }
+        
+                if ($page != $total_pages) {
+                    echo '<li class="page-item"><a class="page-link" href="raciones.php?page='.($page+1).'"><span aria-hidden="true">&raquo;</span></a></li>';
+                }
+            }
+            echo '</ul>';
+            echo '</nav>';
+        }
+?>
+
+
       </div>
 
 </div>
