@@ -16,7 +16,9 @@ if( $seEnvioInfo ) {
     $_SESSION['feedlot'] = $feedlot;
     $_SESSION['tipo'] = $tipo['tipo'];
 
-    header('Location: index.php');
+    echo "<script>
+	    window.location = 'index.php';
+    </script>";
   }
 
   if ($accionValido) {
@@ -30,7 +32,9 @@ if( $seEnvioInfo ) {
         $query = mysqli_query($conexion,$sql);
         }
 
-        header("Location:login.php");
+        echo "<script>
+          window.location = 'login.php';
+        </script>";
     }
   }
 

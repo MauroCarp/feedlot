@@ -63,10 +63,14 @@ function porcentaje($valor,$total){
 	return $resultadoPorcentaje;
 }
 
-function porcentajeMS($valor,$total){
-	$resultadoPorcentaje = ($valor*$total)/100;
-	$resultadoPorcentaje = round($resultadoPorcentaje,2);
-	return $resultadoPorcentaje;
+function porcentajeMS($porcentaje,$porcentajeMSinsumo){
+	
+	$porcentajeMS = $porcentaje * ($porcentajeMSinsumo/100);
+	
+	$porcentajeMS = round($porcentajeMS,2);
+	
+	return $porcentajeMS;
+	
 }
 
 function ultimaFecha($insumo,$conexion){
@@ -102,13 +106,31 @@ function precioInsumo($productoN,$productoResultado,$conexion){
 }
 
 function tomaPorcentajeMS($productoN,$productoResultado,$conexion){
+	
 	$sql = "SELECT * FROM formulas INNER JOIN insumos ON formulas.$productoN = insumos.id WHERE insumos.id = '$productoResultado'";
+	
 	$query = mysqli_query($conexion,$sql);
+	
 	$fila = mysqli_fetch_array($query);
+	
 	$resultado = $fila['porceMS'];
+	
 	return $resultado;
 }
 
+function obtenerMSinsumo($id_insumo,$conexion){
+
+	$sql = "SELECT porceMS FROM insumos WHERE id = '$id_insumo'";
+
+	$query = mysqli_query($conexion,$sql);
+
+	$resultado = mysqli_fetch_array($query);
+
+	$msInsumo = $resultado['porceMS'];
+
+	return $msInsumo;
+
+}
 function nombreFormula($id,$conexion){
 	$sqlFormula = "SELECT tipo,nombre FROM formulas WHERE id = '$id'";
 	$queryFormula = mysqli_query($conexion,$sqlFormula);
@@ -196,11 +218,19 @@ function stock($fecha,$feedlot,$conexion){
 
 }
 
-function porceTC($agua,$porcentaje){
-	$porceTotal = 100 + $agua;
-	$porceTC = ($porcentaje * 100) / $porceTotal;
+function porceMS($id_producto,$porcentaje,$conexion){
 
-	return $porceTC;
+    $sql = "SELECT porceMS FROM insumos WHERE id = '$id_producto'";
+
+    $query = mysqli_query($conexion,$sql);
+    
+    $resultado = mysqli_fetch_array($query);
+
+    $porceMSinsumo = $resultado['porceMS'];
+
+    $porceMS = $porcentaje * ($porceMSinsumo / 100);
+
+    return $porceMS;
 }
 
 

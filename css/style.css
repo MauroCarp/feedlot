@@ -59,6 +59,12 @@
 .icon-filter:before {
   content: "\ea5b";
 }
+.icon-printer:before {
+  content: "\e954";
+}
+.icon-plus:before {
+  content: "\ea0a";
+}
 
 
 
@@ -77,13 +83,7 @@ a{
 a:hover{
   text-decoration: none;
   color:inherit;
-}
-
-.modal{
-  width: 450px;
-  margin-left: -175px;
-}
-
+} 
 
 .table-dos{
 	height: 200px;
@@ -296,6 +296,7 @@ color:#1A9D00;
 -moz-transition: opacity 400ms ease-in;
 transition: opacity 400ms ease-in;
 }
+
 .close {
   line-height: 25px;
   position: absolute;
@@ -312,6 +313,19 @@ transition: opacity 400ms ease-in;
 .loading {
     text-align: center;
 }
+
+.select2-results__option{
+
+  line-height: 1em;
+
+}
+
+.select2-results__group{
+
+  background-color: rgba(91,91,91,.1);
+
+}
+
 footer{
   line-height: 10px;
 }

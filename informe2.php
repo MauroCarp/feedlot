@@ -175,7 +175,7 @@ if ($tipoSesion != 'balanza') {
     </div>
     <div class="container" style="padding-top: 50px;">
       <h1 style="display: inline-block;">Informe <?php echo ucwords($seccion). "Periodo: ".formatearFecha($desde)." -> ".formatearFecha($hasta);?></h1>
-      <h4 style="display: inline-block;float: right;"><?php echo "Fecha: ".$fechaDeHoy;?></h4>
+      <h4 style="display: inline-block;float: right;"><?php echo "<b>".$feedlot."</b> -  Fecha: ".$fechaDeHoy;?></h4>
       <hr>
       <div class="hero-unit" style="padding-top: 10px;">
         <?php

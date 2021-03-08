@@ -49,7 +49,7 @@ $accionValido = array_key_exists("accion", $_REQUEST);
     </div>
     <div class="container" style="padding-top: 50px;">
       <h1 style="display: inline-block;">IMPORTAR / EXPORTAR DATOS</h1> 
-      <h4 style="display: inline-block;float: right;"><?php echo "Fecha: ".$fechaDeHoy;?></h4>
+      <h4 style="display: inline-block;float: right;"><?php echo "<b>".$feedlot."</b> -  Fecha: ".$fechaDeHoy;?></h4>
       <hr>
 
       <div class="hero-unit" style="padding-top: 10px;">

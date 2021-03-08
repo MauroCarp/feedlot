@@ -102,7 +102,109 @@ function mostrarReceta($id_receta,$archivo,$conexion){
         }
       });
 
-      }
+    }
+
+    function cargarCarga(id_carga,archivo){
+      
+      url = 'cargas.ajax.php';
+
+      data = 'idCarga=' + id_carga + '&archivo=' + archivo;
+
+      $.ajax({
+        type:'POST',
+
+        url:url,
+
+        data:data,
+
+        success: function(resultado){
+
+          var resultadoParse = JSON.parse(resultado);
+
+          if(resultadoParse['mixer'] == 'mixer1'){
+            
+            var mixer = '456ST';
+            var mixer2 = 'Autoconsumo';
+        
+          }else{
+
+            var mixer = 'Autoconsumo';
+            var mixer2 = '456ST';
+
+          }          
+          var fecha = resultadoParse['fecha'];
+          var hora = resultadoParse['hora'];
+          var cantidad = resultadoParse['cantidad'];
+          var ideal = resultadoParse['ideal'];
+          var ingrediente = resultadoParse['ingrediente'];
+
+          $('#id_carga').val(id_carga);
+
+          $('#mixerCarga').html("<option value='" + mixer + "' selected>" + mixer + "</option><option value='" + mixer2 + "'>" + mixer2 + "</option>");          
+          $('#fechaCarga').val(fecha);
+          $('#horaCarga').val(hora);
+          $('#cantidadCarga').val(cantidad);
+          $('#ingredienteCarga').val(ingrediente);
+          $('#idealCarga').val(ideal);
+
+        }
+      });
+
+    }
+
+    function cargarDescarga(id_descarga,archivo){
+      
+      url = 'descargas.ajax.php';
+
+      data = 'idDescarga=' + id_descarga + '&archivo=' + archivo;
+
+      $.ajax({
+        type:'POST',
+
+        url:url,
+
+        data:data,
+
+        success: function(resultado){
+
+          var resultadoParse = JSON.parse(resultado);
+
+          if(resultadoParse['mixer'] == 'mixer1'){
+          
+            var mixer = '456ST';
+            var mixer2 = 'Autoconsumo';
+          
+          }else{
+
+            var mixer = 'Autoconsumo';
+            var mixer2 = '456ST';
+
+          }
+
+          var fecha = resultadoParse['fecha'];
+          var hora = resultadoParse['hora'];
+          var cantidad = resultadoParse['cantidad'];
+          var lote = resultadoParse['lote'];
+          var animales = resultadoParse['animales'];
+          var operario = resultadoParse['operario'];
+
+
+
+          $('#id_descarga').val(id_descarga);
+          $('#mixerDescarga').html("<option value='" + mixer + "' selected>" + mixer + "</option><option value='" + mixer2 + "'>" + mixer2 + "</option>");
+          $('#fechaDescarga').val(fecha);
+          $('#horaDescarga').val(hora);
+          $('#cantidadDescarga').val(cantidad);
+          $('#animales').val(animales);
+          $('#lote').val(lote);
+          $('#operario').val(operario);
+
+        }
+      });
+
+    }
+
+
        
 
     </script>
@@ -124,11 +226,11 @@ function mostrarReceta($id_receta,$archivo,$conexion){
         </div>
       </div>
     </div>
-    <div class="container" style="padding-top: 50px;">
+    <div class="container" style="padding-top: 50px;z-index:-1  ">
       <h1 style="display: inline-block;">RACIONES</h1>
-      <h4 style="display: inline-block;float: right;"><?php echo "Fecha: ".$fechaDeHoy;?></h4>
+      <h4 style="display: inline-block;float: right;"><?php echo "<b>".$feedlot."</b> -  Fecha: ".$fechaDeHoy;?></h4>
       <div class="hero-unit" style="padding-top: 10px;margin-bottom: 5px;">
-        <form class="well form-inline">
+        <div class="well form-inline">
 
           <label>Mixer</label>
 
@@ -138,7 +240,7 @@ function mostrarReceta($id_receta,$archivo,$conexion){
             
             <option value="mixer1">456ST</option>
 
-            <option value="mixer2">Mixer 2</option>
+            <option value="mixer2">Autoconsumo</option>
 
           </select>
           
@@ -158,7 +260,7 @@ function mostrarReceta($id_receta,$archivo,$conexion){
 
           <label class="lotes">Lotes</label>
 
-          <select multiple="multiple" id="Lotes" size="3" class="lotes" class="input-small">
+          <select multiple="multiple" id="lotes" size="3" class="lotes" class="input-small">
           <?php
 
             $sqlLotes = "SELECT DISTINCT(lote) FROM mixer_descargas WHERE fecha = '$fecha' ORDER BY lote ASC";
@@ -179,7 +281,8 @@ function mostrarReceta($id_receta,$archivo,$conexion){
 
           <button type="submit" class="btn" id='filtrar'>Filtrar</button>
       
-        </form>
+        </div>
+            
           <button class="btn btn-default" id='btnTablaCargas'><b>Cargas <span style='color:green;'><b>&uarr;</b></span></b></button><br>
 
           <div class="tablasOperaciones" id="tablaCargas">
@@ -204,6 +307,8 @@ function mostrarReceta($id_receta,$archivo,$conexion){
                     
                     <th>Receta</th>
 
+                    <th></th>
+
                 </thead>
 
                 <tbody>
@@ -216,12 +321,13 @@ function mostrarReceta($id_receta,$archivo,$conexion){
 
                     while($cargas = mysqli_fetch_array($queryCargas)){ 
                         
-                        $mixer     = ($cargas['mixer'] == 'mixer1') ? '456ST' : 'Mixer 2';
+                        $mixer     = ($cargas['mixer'] == 'mixer1') ? '456ST' : 'Autoconsumo';
                         
                         $id_receta = $cargas['id_receta'];
 
                         $archivo   = $cargas['archivo'];
 
+                        
                     ?>
                     <tr>
                     
@@ -239,7 +345,28 @@ function mostrarReceta($id_receta,$archivo,$conexion){
 
                         <td><?php echo $cargas['ideal'].' Kg';?></td>
     
-                        <td><button class="btn btn-default" data-toggle="modal" data-target="#modalReceta" onclick="cargarReceta('<?php echo $id_receta;?>','<?php echo $archivo;?>')"><?php echo mostrarReceta($id_receta,$archivo,$conexion);?></button></td>
+                        <td>
+                        <?php
+
+                          if ($mixer == 'Autoconsumo') { ?>
+
+                            <button class="btn btn-default"> - </button>
+                            
+                          <?php
+
+                          }else{ ?>
+                            
+                            <button class="btn btn-default" data-toggle="modal" data-target="#modalReceta" onclick="cargarReceta('<?php echo $id_receta;?>','<?php echo $archivo;?>')"><?php echo mostrarReceta($id_receta,$archivo,$conexion);?></button>  
+
+                         <?php }
+                        ?>
+                        </td>  
+                        
+
+                        <td>
+
+                        <button class="btn btn-default" data-toggle="modal" data-target="#modalCarga" onclick="cargarCarga('<?php echo $cargas['id'];?>','<?php echo $archivo;?>')"><i class="icon-pencil"></i></button>  
+                        </td>
                         
                     <?php
 
@@ -252,7 +379,9 @@ function mostrarReceta($id_receta,$archivo,$conexion){
             </table>
 
           </div>
+
           <hr>
+
           <button class="btn btn-default" id='btnTablaDescargas'><b>Descargas <span style='color:blue'>&darr;</span></b></button>
 
           <div class="tablasOperaciones" id="tablaDescargas">
@@ -277,6 +406,8 @@ function mostrarReceta($id_receta,$archivo,$conexion){
                     
                     <th>Operario</th>
 
+                    <th></th>
+
                 </thead>
 
                 <tbody>
@@ -288,7 +419,7 @@ function mostrarReceta($id_receta,$archivo,$conexion){
 
                     while($descargas = mysqli_fetch_array($queryDescargas)){ 
                         
-                        $mixer = ($descargas['mixer'] == 'mixer1') ? '456ST' : 'Mixer 2';
+                        $mixer = ($descargas['mixer'] == 'mixer1') ? '456ST' : 'Autoconsumo';
 
                     ?>
                     <tr>
@@ -309,8 +440,13 @@ function mostrarReceta($id_receta,$archivo,$conexion){
     
                         <td><?php echo $descargas['operario'];?></td>
                         
-                    <?php
+                        <td>
 
+                        <button class="btn btn-default" data-toggle="modal" data-target="#modalDescarga" onclick="cargarDescarga('<?php echo $descargas['id'];?>','<?php echo $archivo;?>')"><i class="icon-pencil"></i></button>  
+                        </td>                       
+
+
+                    <?php
                       $cont++;
                     
                     }
@@ -332,8 +468,11 @@ function mostrarReceta($id_receta,$archivo,$conexion){
       </footer>
     </div>
     
-    <div class="modal fade" style="width: 350px;margin: 0 auto;margin-left:-175px;z-index:9999;" id="modalReceta" tabindex="-1" role="dialog" aria-hidden="true">
-      
+
+    <!-- MODAL RECETA -->
+
+    <div class="modal fade" style="width: 350px;margin: 0 auto;margin-left:-175px;z-index:99;" id="modalReceta" tabindex="-1" role="dialog" aria-hidden="true">
+                    
       <div class="modal-dialog" role="document">
       
         <div class="modal-content">
@@ -364,6 +503,196 @@ function mostrarReceta($id_receta,$archivo,$conexion){
 
           </div>
                     
+          </div>
+          
+        </div>
+        
+      </div>
+
+    </div>
+
+
+
+    <!-- MODAL MODIFICAR CARGA -->
+
+
+    <div class="modal fade" style="width: 350px;margin: 0 auto;margin-left:-175px;z-index:99;" id="modalCarga" tabindex="-1" role="dialog" aria-hidden="true">
+                    
+      <div class="modal-dialog" role="document">
+      
+        <div class="modal-content">
+        
+          <div class="modal-header">
+          
+            <h4 class="modal-title">Modificar Registro de Carga</h4>
+            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            
+          </div>
+          
+          <div class="modal-body">
+
+            <div class="row-fluid">
+            <input type="hidden" id="id_carga">
+              <div class="form-group">
+            
+                <label for="mixerCarga"><b>Mixer</b></label>
+            
+                <select class="form-control" id="mixerCarga">
+                
+                    <option value="456ST">456ST</option>
+                
+                    <option value="Autoconsumo">Autoconsumo</option>
+                
+                </select>             
+                
+              </div>
+            
+              <div class="form-group">
+            
+                <label for="fechaCarga"><b>Fecha</b></label>
+            
+                <input type="date" class="form-control" id="fechaCarga">
+            
+              </div>
+            
+              <div class="form-group">
+            
+                <label for="horaCarga"><b>Hora</b></label>
+            
+                <input type="text" class="form-control" id="horaCarga" readonly>
+            
+              </div>
+              
+              <div class="form-group">
+            
+                <label for="ingredienteCarga"><b>Ingrediente</b></label>
+            
+                <input type="text" class="form-control" id="ingredienteCarga">
+            
+              </div>
+            
+              <div class="form-group">
+            
+                <label for="cantidadCarga"><b>Cant. Kg</b></label>
+            
+                <input type="number" class="form-control" id="cantidadCarga">
+            
+              </div>
+              
+              <div class="form-group">
+            
+                <label for="idealCarga"><b>Ideal</b></label>
+            
+                <input type="number" class="form-control" id="idealCarga">
+            
+              </div>
+
+              <div class="form-group">
+            
+                <button class="btn btn-succes" id="modificarCarga">Modificar</button>
+            
+              </div>
+            
+            </div>
+        
+          </div>
+          
+        </div>
+        
+      </div>
+
+    </div>
+
+
+    <!-- MODAL MODIFICAR DESCARGA -->
+
+
+    <div class="modal fade" style="width: 350px;margin: 0 auto;margin-left:-175px;z-index:99;" id="modalDescarga" tabindex="-1" role="dialog" aria-hidden="true">
+                    
+      <div class="modal-dialog" role="document">
+      
+        <div class="modal-content">
+        
+          <div class="modal-header">
+          
+            <h4 class="modal-title">Modificar Registro de Descarga</h4>
+            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            
+          </div>
+          
+          <div class="modal-body">
+
+            <div class="row-fluid">
+                  <input type="hidden" id="id_descarga">
+              <div class="form-group">
+            
+                <label for="mixerDescarga"><b>Mixer</b></label>
+                
+                <select class="form-control" id="mixerDescarga">
+                    <option value="456ST">456ST</option>
+                    <option value="Autoconsumo">Autoconsumo</option>
+                </select>     
+
+              </div>
+            
+              <div class="form-group">
+            
+                <label for="fechaDescarga"><b>Fecha</b></label>
+            
+                <input type="date" class="form-control" id="fechaDescarga">
+            
+              </div>
+            
+              <div class="form-group">
+            
+                <label for="horaDescarga"><b>Hora</b></label>
+            
+                <input type="text" class="form-control" id="horaDescarga" readonly>
+            
+              </div>
+              
+              <div class="form-group">
+            
+                <label for="lote"><b>Lote</b></label>
+            
+                <input type="text" class="form-control" id="lote">
+            
+              </div>
+            
+              <div class="form-group">
+            
+                <label for="cantidadDescarga"><b>Cant. Kg</b></label>
+            
+                <input type="number" class="form-control" id="cantidadDescarga">
+            
+              </div>
+              
+              <div class="form-group">
+            
+                <label for="animales"><b>Animales</b></label>
+            
+                <input type="number" class="form-control" id="animales">
+            
+              </div>
+              
+              <div class="form-group">
+            
+                <label for="operario"><b>Operario</b></label>
+            
+                <input type="text" class="form-control" id="operario">
+            
+              </div>
+
+              <div class="form-group">
+            
+                <button class="btn btn-succes" id="modificarDescarga">Modificar</button>
+            
+              </div>
+            
+            </div>
+        
           </div>
           
         </div>
@@ -409,7 +738,136 @@ function mostrarReceta($id_receta,$archivo,$conexion){
 
     });
 
+    $('#modificarCarga').click(()=>{
+      
+      var id_carga = $('#id_carga').val();
+      var mixerCarga = $('#mixerCarga').val();
+      var fechaCarga = $('#fechaCarga').val();
+      var horaCarga = $('#horaCarga').val();
+      var ingredienteCarga = $('#ingredienteCarga').val();
+      var cantidadCarga = $('#cantidadCarga').val();
+      var idealCarga = $('#idealCarga').val();
 
+      
+      url = 'cargas.ajax.php';
+
+      data = 'idCarga=' + id_carga +'&mixer=' + mixerCarga +'&fecha=' + fechaCarga +'&hora=' + horaCarga +'&ingrediente=' + ingredienteCarga +'&cantidad=' + cantidadCarga +'&ideal=' + idealCarga + '&archivo=' + '&accion=modificar';
+      console.log(data);
+      $.ajax({
+        type:'POST',
+
+        url:url,
+
+        data:data,
+
+        success: function(resultado){
+
+          window.location = 'verOperacion.php?fecha=' + fechaCarga;
+
+        }
+      });
+
+
+    });
+
+
+    $('#modificarDescarga').click(()=>{
+      
+      var id_descarga = $('#id_descarga').val();
+      var mixerDescarga = $('#mixerDescarga').val();
+      var fechaDescarga = $('#fechaDescarga').val();
+      var horaDescarga = $('#horaDescarga').val();
+      var lote = $('#lote').val();
+      var cantidadDescarga = $('#cantidadDescarga').val();
+      var animales = $('#animales').val();
+      var operario = $('#operario').val();
+
+      
+      url = 'descargas.ajax.php';
+
+      data = 'idDescarga=' + id_descarga +'&mixer=' + mixerDescarga +'&fecha=' + fechaDescarga +'&hora=' + horaDescarga +'&lote=' + lote +'&cantidad=' + cantidadDescarga +'&animales=' + animales + '&operario=' + operario + '&accion=modificar';
+      console.log(data);
+      $.ajax({
+        type:'POST',
+
+        url:url,
+
+        data:data,
+
+        success: function(resultado){
+
+          window.location = 'verOperacion.php?fecha=' + fechaDescarga;
+
+        }
+      });
+
+
+    });
+
+    $('#filtrar').click(()=>{
+      var data = [];
+
+      
+      if($('#mixer').val() != ''){
+
+        var mixer = $('#mixer').val();        
+
+        data.push('mixer=' + mixer);
+      
+      } 
+
+      var tipo = 'tipo=' + $('#tipo').val();
+
+      data.push(tipo);
+
+      if($('#tipo').val() == 'descarga'){
+
+        var lotes = $('#lotes').val();
+
+        if(lotes != null){
+
+          lotes = lotes.join(',');
+                    
+          data.push('lotes=' + lotes);
+          
+        }
+      
+      }
+
+      var fecha = '<?php echo $_GET['fecha'];?>';
+
+      var url = 'filtroOperaciones.ajax.php';
+      
+      data = data.join('&');
+      
+      data += '&fecha=' + fecha;
+
+      console.log(data);
+
+      $(".well").after('<div class="loading">Un momento, por favor...</div>');
+
+      $.ajax({
+      type:'POST',
+      url:url,
+      data:data,
+      success: function(result){
+          
+          $('#btnTablaCargas').remove();        
+          $('#btnTablaDescargas').remove();   
+          $('#tablaCargas').remove();  
+          $('#tablaDescargas').remove();     
+          $('hr').remove();
+          $('.loading').remove();
+          $(".well").after(result);
+          $('footer').insertBefore('<hr>');
+
+
+        }
+
+      });
+       
+
+    });
 
    </script>
 

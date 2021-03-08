@@ -46,8 +46,10 @@ if ($accionValido) {
     VALUES ('$feedlot','$fecha','$turno','$operario','$formula','$corral','$kilos')";
     $query = mysqli_query($conexion,$sql);
     echo mysqli_error($conexion);
-    header("Location:raciones.php?seccion=ingreso");
 
+    echo "<script>
+	    window.location = 'raciones.php?seccion=ingreso';
+    </script>";
   }
 
   if ($accion == 'modificarIngreso') {
@@ -77,7 +79,10 @@ if ($accionValido) {
     WHERE id = '$id'";
     $queryModificar = mysqli_query($conexion,$sqlModificar);
     echo mysqli_error($conexion);
-    header('Location:raciones.php');
+
+    echo "<script>
+	    window.location = 'raciones.php';
+    </script>";
 
   }
 
@@ -108,83 +113,142 @@ if ($accionValido) {
       
     }
 
-    header("Location:raciones.php?seccion=ingreso");
+
+    echo "<script>
+	    window.location = 'raciones.php?seccion=ingreso';
+    </script>";
   }
 
   if ($accion == 'cargarRedondeo') {
+
     $redondeo = array();
+
     for ($i=1; $i <= 30; $i++) { 
+
       $numero = "redondeo".$i;
+
      if (isset($_POST[$numero])) {
+
          $redondeo[] = $_POST[$numero];
+
         }
+
     }
 
     $redondeo = implode(",", $redondeo);
 
-    $redondeoAgua = $_POST['redondeoAgua'];
     $margen = $_POST['margenError'];
 
     $id = $_GET['id'];
-    $sqlRedondeo = "UPDATE raciones SET
+
+    $sqlRedondeo = "UPDATE mixer SET
+
     redondeo = '$redondeo',
-    redondeoAgua = '$redondeoAgua',
+    
     margen = '$margen'
+
     WHERE id = '$id'";
+
     $queryRedondeo = mysqli_query($conexion,$sqlRedondeo);
 
-    header("Location:raciones.php?seccion=mixer");
+    echo "<script>
+	    window.location = 'raciones.php?seccion=mixer';
+    </script>";
   }
 
 
 /////// INSUMOS  ////////
 
   if ($accion == 'nuevoInsumo') {
-    $insumo = $_POST['insumo'];
+
+    $insumo = $_POST['nombre'];
+
     $precio = $_POST['precio'];
-    $porceMS = $_POST['porceMS'];
+
+    $porceMS = $_POST['porMS'];
+
+    $proteina = $_POST['proteina'];
+
+    $tipo = $_POST['tipoInsumo'];
+
+    $tipo = ($tipo == 'otroTipo') ? $_POST['otroTipo'] : $tipo;
+
     
     $sqlValido = "SELECT COUNT(insumo) AS valido FROM insumos WHERE insumo = '$insumo'";
+
     $queryValido =  mysqli_query($conexion,$sqlValido);
+
     $insumoValido = mysqli_fetch_array($queryValido);
 
+
     if ($insumoValido['valido']) { ?>
-    <script type="text/javascript">
-          alert("Ya existe un Insumo con ese nombre. Agregar numero, ejemplo, Insumo 1.");
-          window.location = 'raciones.php?seccion=insumos';
-        </script>
+
+      <script type="text/javascript">
+
+            alert("Ya existe un Insumo con ese nombre. Agregar numero, ejemplo, Insumo 1.");
+
+            window.location = 'raciones.php?seccion=insumos';
+
+      </script>
+
     <?php
+
     die();
-    }
-    $sql = "INSERT INTO insumos(feedlot,insumo,precio,porceMS,fecha) VALUES ('$feedlot','$insumo','$precio','$porceMS','$fecha')";
+    
+  }
+
+    $sql = "INSERT INTO insumos(feedlot,insumo,tipo,precio,porceMS,Pr,fecha) VALUES ('$feedlot','$insumo','$tipo','$precio','$porceMS','$proteina','$fecha')";
+
     mysqli_query($conexion,$sql);
 
-    $sqlRegistro = "INSERT INTO registroinsumo(insumo,precio,porceMS,fecha) VALUES ('$insumo','$precio','$porceMS','$fecha')";
-    mysqli_query($conexion,$sqlRegistro);
 
+  $sqlRegistro = "INSERT INTO registroinsumo(insumo,precio,porceMS,fecha) VALUES ('$insumo','$precio','$porceMS','$fecha')";
+  
+  mysqli_query($conexion,$sqlRegistro);
 
-    header("Location:raciones.php?seccion=insumos");
+    echo "<script>
+
+	    window.location = 'raciones.php?seccion=insumos';
+
+    </script>";
+
 
 
   }
 
   if ($accion == "modificarInsumo") {
+
     $id = $_GET['id'];
-    
-    $insumo = $_POST['insumo'];
+
+    $insumo = $_POST['nombre'];
+
     $precio = $_POST['precio'];
-    $porceMS = $_POST['porceMS'];
+
+    $porceMS = $_POST['porMS'];
+
+    $proteina = $_POST['proteina'];
+
+    $tipo = $_POST['tipoInsumo'];
+
+    $tipo = ($tipo == 'otroTipo') ? $_POST['otroTipo'] : $tipo;
+
 
     $sql = "UPDATE insumos SET
+    insumo = '$insumo',
+    tipo = '$tipo',
     precio = '$precio',
     porceMS = '$porceMS',
+    Pr = '$proteina',
     fecha = '$fecha'
     WHERE id = '$id'";
     mysqli_query($conexion,$sql);
 
     $sqlRegistro = "INSERT INTO registroinsumo(insumo,precio,porceMS,fecha) VALUES ('$insumo','$precio','$porceMS','$fecha')";
     mysqli_query($conexion,$sqlRegistro);
-    header("Location:raciones.php?seccion=insumos");
+
+    echo "<script>
+	    window.location = 'raciones.php?seccion=insumos';
+    </script>";
 
   }
 
@@ -197,166 +261,272 @@ if ($accionValido) {
     $sql = "DELETE FROM registroinsumo WHERE insumo = '$insumo'";
     mysqli_query($conexion,$sql);
 
-    header("Location:raciones.php?seccion=insumos");
+
+    echo "<script>
+	    window.location = 'raciones.php?seccion=insumos';
+    </script>";
   }
 
   if ($accion == "eliminarRegistro") {
     $id = $_GET['id'];
     $sql = "DELETE FROM registroinsumo WHERE id = '$id'";
     mysqli_query($conexion,$sql);
-    header("Location:raciones.php?seccion=insumos");
+
+    echo "<script>
+	    window.location = 'raciones.php?seccion=insumos';
+    </script>";
 
   }
 
-//////  FORMULA  /////
+/*********
+                FORMULA
+                            *********/
+
+
   if ($accion == 'nuevaFormula') {
+
     $nombre = $_POST['nombre'];
 
+    $tipoFormula = $_POST['tipo'];
+
+    $otroTipo = $_POST['tipoOtra'];
+
+
+    if ($tipoFormula == 'otro') {
+
+      $tipoFormula = $otroTipo;
+
+      $sqlNueva = "INSERT INTO tipoformula(tipo) VALUES ('$tipoFormula')";
+
+      $queryNueva = mysqli_query($conexion,$sqlNueva);
+      
+    }
+
+
     $productos = array();
+
     $productos[] = $_POST['producto'];
+
     for ($i=1; $i <=30 ; $i++) { 
+
       $producto = "producto".$i;
-        if (isset($_POST[$producto])) {
-         $productos[] = $_POST[$producto];
-        }
+
+      if (isset($_POST[$producto])) {
+
+        $productos[] = $_POST[$producto];
+
       }
+
+    }
+
 
     if (isset($_POST['productoN'])) {
+
       $productos[] = $_POST['productoN']; 
+
       for ($i=1; $i <=30 ; $i++) { 
+
         $productoN = "productoN".$i;
+
           if (isset($_POST[$productoN])) {
+
            $productos[] = $_POST[$productoN];
+
           }
+
         }
+
     }
 
-      $porcentajes = array();
+    $porcentajes = array();
 
-      $porcentajes[] = $_POST['porcentaje'];
-      for ($a=1; $a <=30 ; $a++) { 
+    $porcentajes[] = $_POST['porcentaje'];
+
+    for ($a=1; $a <=30 ; $a++) { 
+
       $porcentaje = "porcentaje".$a;
-        if (isset($_POST[$porcentaje])) {
-         $porcentajes[] = $_POST[$porcentaje];
-        }
+
+      if (isset($_POST[$porcentaje])) {
+
+        $porcentajes[] = $_POST[$porcentaje];
+
       }
+
+    }
+
 
     if (isset($_POST['porcentajeN'])) {
+
       $porcentajes[] = $_POST['porcentajeN'];
+
       for ($a=1; $a <=30 ; $a++) { 
+
       $porcentajeN = "porcentajeN".$a;
+
         if (isset($_POST[$porcentajeN])) {
+
          $porcentajes[] = $_POST[$porcentajeN];
+
         }
+
       }
+
     }
 
-      $porcentajeAgua = $_POST['porcentajeAgua'];
-      $total = $_POST['total'];
+    $total = $_POST['total'];
 
+    $fechaFormula = date("Y-m-d");
+
+    $sql = "INSERT INTO formulas(fecha,nombre,tipo,precio) VALUES ('$fechaFormula','$nombre','$tipoFormula','$total')";
+    
+    $query = mysqli_query($conexion,$sql);
+
+    
+    $sqlDatos = "SELECT id FROM formulas WHERE tipo = '$tipoFormula' AND nombre = '$nombre'";
+
+    $queryDatos = mysqli_query($conexion,$sqlDatos);
+
+    $fila = mysqli_fetch_array($queryDatos);
+
+    $id = $fila['id'];
+
+
+    for ($i=0; $i < sizeof($productos) ; $i++) {
+
+      $producto = "p".($i+1);
+
+      $sqlProductos = "UPDATE formulas SET $producto = '$productos[$i]' WHERE id = '$id'"; 
+
+      $queryProductos = mysqli_query($conexion,$sqlProductos);
+
+      echo mysqli_error($conexion);
+
+    }
+
+    for ($i=0; $i < sizeof($porcentajes) ; $i++) {
+
+      $porcentaje = "por".($i+1);
+
+      $sqlPorc = "UPDATE formulas SET $porcentaje = '$porcentajes[$i]' WHERE id = '$id'"; 
+
+      $queryPorc = mysqli_query($conexion,$sqlPorc);
+
+      echo mysqli_error($conexion);
+
+    }      
+
+      echo "<script>
+      
+	      window.location = 'raciones.php?seccion=formulas';
+      
+      </script>";
+
+      
+  }
+
+  if ($accion == 'modificarFormula') {
+
+      $id = $_GET['id'];
+
+      $nombre = $_POST['nombre'];
+
+
+      
+      $productos = array();
+      
+      $productos[] = $_POST['producto'];
+      
+      for ($i=1; $i <=30 ; $i++) { 
+        
+        $producto = "producto".$i;
+
+        if (isset($_POST[$producto])) {
+
+          $productos[] = $_POST[$producto];
+          
+        }
+        
+      }
+      
+      
+      $porcentajes = array();
+      
+      $porcentajes[] = $_POST['porcentaje'];
+      
+      for ($a=1; $a <=30 ; $a++) { 
+        
+        $porcentaje = "porcentaje".$a;
+        
+        if (isset($_POST[$porcentaje])) {
+          
+          $porcentajes[] = $_POST[$porcentaje];
+          
+        }
+      }
+            
+      $total = $_POST['total'];   
+      
       $tipoFormula = $_POST['tipo'];
       $otroTipo = $_POST['tipoOtra'];
-
-      if ($tipoFormula == 'otro') {
-        $tipoFormula = $otroTipo;
-        $sqlNueva = "INSERT INTO tipoFormula(tipo) VALUES ('$tipoFormula')";
-        $queryNueva = mysqli_query($conexion,$sqlNueva);
-
-      }
-
-      $fechaFormula = date("Y-m-d");
-      $sql = "INSERT INTO formulas(fecha,nombre,tipo,agua,precio) VALUES ('$fechaFormula','$nombre','$tipoFormula','$porcentajeAgua','$total')";
-      $query = mysqli_query($conexion,$sql);
       
+      if ($tipoFormula == 'otro') {
+        
+        $tipoFormula = $otroTipo;
+        
+        $sqlNueva = "INSERT INTO tipoFormula(tipo) VALUES ('$tipoFormula')";
+        
+        $queryNueva = mysqli_query($conexion,$sqlNueva);
+        
+      }
+      
+      $fechaFormula = date("Y-m-d");
+
+      $sql = "DELETE FROM formulas WHERE id = '$id'";
+
+      mysqli_query($conexion,$sql);
+
+
+      $sql = "INSERT INTO formulas(fecha,nombre,tipo,precio) VALUES ('$fechaFormula','$nombre','$tipoFormula','$total')";
+
+      $query = mysqli_query($conexion,$sql);
+
+      echo mysqli_error($conexion);
+
+    
       $sqlDatos = "SELECT id FROM formulas WHERE tipo = '$tipoFormula' AND nombre = '$nombre'";
       $queryDatos = mysqli_query($conexion,$sqlDatos);
+
       $fila = mysqli_fetch_array($queryDatos);
+
       $id = $fila['id'];
-
-
+      
       for ($i=0; $i < sizeof($productos) ; $i++) {
+
         $producto = "p".($i+1);
+
         $sqlProductos = "UPDATE formulas SET $producto = '$productos[$i]' WHERE id = '$id'"; 
+
         $queryProductos = mysqli_query($conexion,$sqlProductos);
-        echo mysqli_error($conexion);
+
       }
 
       for ($i=0; $i < sizeof($porcentajes) ; $i++) {
+
         $porcentaje = "por".($i+1);
 
+
         $sqlPorc = "UPDATE formulas SET $porcentaje = '$porcentajes[$i]' WHERE id = '$id'"; 
+
         $queryPorc = mysqli_query($conexion,$sqlPorc);
+
         echo mysqli_error($conexion);
+
       }      
-      header("Location:raciones.php?seccion=formulas");
+    
+      echo "<script>
+	    window.location = 'raciones.php?seccion=formulas';
+    </script>";
 
-    }
-
-  if ($accion == 'modificarFormula') {
-      $id = $_GET['id'];
-      $nombre = $_POST['nombre'];
-
-      $productos = array();
-      $productos[] = $_POST['producto'];
-      for ($i=1; $i <=30 ; $i++) { 
-        $producto = "producto".$i;
-          if (isset($_POST[$producto])) {
-           $productos[] = $_POST[$producto];
-          }
-        }
-     
-
-        $porcentajes = array();
-
-        $porcentajes[] = $_POST['porcentaje'];
-        for ($a=1; $a <=30 ; $a++) { 
-        $porcentaje = "porcentaje".$a;
-          if (isset($_POST[$porcentaje])) {
-           $porcentajes[] = $_POST[$porcentaje];
-          }
-        }
-
-      
-
-        $porcentajeAgua = $_POST['porcentajeAgua'];
-        $total = $_POST['total'];   
-
-        $tipoFormula = $_POST['tipo'];
-        $otroTipo = $_POST['tipoOtra'];
-
-        if ($tipoFormula == 'otro') {
-          $tipoFormula = $otroTipo;
-          $sqlNueva = "INSERT INTO tipoFormula(tipo) VALUES ('$tipoFormula')";
-          $queryNueva = mysqli_query($conexion,$sqlNueva);
-        }
-
-        $fechaFormula = date("Y-m-d");
-        $sql = "DELETE FROM formulas WHERE id = '$id'";
-        mysqli_query($conexion,$sql);
-
-        $sql = "INSERT INTO formulas(fecha,nombre,tipo,agua,precio) VALUES ('$fechaFormula','$nombre','$tipoFormula','$porcentajeAgua','$total')";
-        $query = mysqli_query($conexion,$sql);
-      
-        $sqlDatos = "SELECT id FROM formulas WHERE tipo = '$tipoFormula' AND nombre = '$nombre'";
-        $queryDatos = mysqli_query($conexion,$sqlDatos);
-        $fila = mysqli_fetch_array($queryDatos);
-        $id = $fila['id'];
-
-        
-        for ($i=0; $i < sizeof($productos) ; $i++) {
-          $producto = "p".($i+1);
-          $sqlProductos = "UPDATE formulas SET $producto = '$productos[$i]' WHERE id = '$id'"; 
-          $queryProductos = mysqli_query($conexion,$sqlProductos);
-        }
-
-        for ($i=0; $i < sizeof($porcentajes) ; $i++) {
-          $porcentaje = "por".($i+1);
-
-          $sqlPorc = "UPDATE formulas SET $porcentaje = '$porcentajes[$i]' WHERE id = '$id'"; 
-          $queryPorc = mysqli_query($conexion,$sqlPorc);
-          echo mysqli_error($conexion);
-        }      
-      header("Location:raciones.php?seccion=formulas");
   }
 
   if ($accion == 'eliminarFormula') {
@@ -364,8 +534,10 @@ if ($accionValido) {
     $sqlFormula = "DELETE FROM formulas WHERE id = '$id'";
     $queryFormula = mysqli_query($conexion,$sqlFormula);
     echo mysqli_error($conexion);
-
-    header("Location:raciones.php?seccion=formulas");
+    
+    echo "<script>
+	    window.location = 'raciones.php?seccion=formulas';
+    </script>";
   }
 }
 
@@ -390,10 +562,13 @@ if ($accionValido) {
     <link rel="shortcut icon" href="#" type="image/x-icon"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="js/miselect.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/miselect.css" rel="stylesheet">
+
 
 
     <style type="text/css">
@@ -406,7 +581,7 @@ if ($accionValido) {
 
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -421,42 +596,80 @@ if ($accionValido) {
       </div>
     </div>
     <div class="container" style="padding-top: 50px;">
+
       <h1 style="display: inline-block;">Raciones</h1>
-      <h4 style="display: inline-block;float: right;"><?php echo "Fecha: ".$fechaDeHoy;?></h4>
+
+      <h4 style="display: inline-block;: right;"><?php echo "<b>".$feedlot."</b> -  Fecha: ".$fechaDeHoy;?></h4>
+
       <hr style="padding:0;margin-top:0;">
+
       <div class="hero-unit" style="padding-top: 10px;">
+
         <div class="bs-docs-example">
+
           <ul id="myTab" class="nav nav-tabs">
+
             <li <?php if($seccion == 'ingreso' OR $seccion == ''){ echo "class=\"active\"";}?>><a href="#ingresos" data-toggle="tab" class="labels">Ingreso</a></li>
+
             <li <?php if($seccion == 'insumos'){ echo "class=\"active\"";}?>><a href="#insumos" data-toggle="tab" class="labels">Insumos</a></li>
+
             <li <?php if($seccion == 'formulas'){ echo "class=\"active\"";}?>><a href="#formulas" data-toggle="tab" class="labels">Formulas</a></li>
+
+            <li <?php if($seccion == 'premix'){ echo "class=\"active\"";}?>><a href="#premix" data-toggle="tab" class="labels">Premix</a></li>
+
             <li <?php if($seccion == 'mixer'){ echo "class=\"active\"";}?>><a href="#mixer" data-toggle="tab" class="labels">Mixer</a></li>
+
           </ul>
+
           <div id="myTabContent" class="tab-content">
+
             
             <div class="tab-pane fade <?php if($seccion == 'insumos'){ echo 'active in';}?>" id="insumos">
+
               <?php include("insumos.php");?>
+
             </div>
 
+
             <div class="tab-pane fade <?php if($seccion == 'formulas'){ echo 'active in';}?>" id="formulas">
+
               <?php 
               if ($accionValido) {
+
                 if ($accion == "modificar") {
+
                   $id = $_GET['id'];
+
                   include("modificarFormula.php");
+
                 }
+
               }else{
+
                 include("formulas.php");
+
               }
+
               ?>
+
             </div>
 
             <div class="tab-pane fade <?php if($seccion == 'mixer'){ echo 'active in';}?>" id="mixer">
-              <?php include("mixer.php");?>
-            </div>
 
+            <?php include("mixer.php");?>
+
+            </div>
+            
+            <div class="tab-pane fade <?php if($seccion == 'premix'){ echo 'active in';}?>" id="premix">
+
+            <?php include("premix.php");?>
+
+            </div>
+           
             <div class="tab-pane fade <?php if($seccion == 'ingreso' OR $seccion == ''){ echo 'active in';}?>" id="ingresos">
+
               <?php include("ingresoRacion.php");?>
+
             </div>
 
           </div>
@@ -469,196 +682,6 @@ if ($accionValido) {
     </div> <!-- /container -->
 
   <script type="text/javascript">
-
-    function calcularPrecioPorcentaje(precioTC,porcentajeTC){
-        let precioPorcentaje = (porcentajeTC * precioTC) / 100;
-        return precioPorcentaje;
-    }
-      let inputAgua = document.getElementById('porcentajeAgua');
-      inputAgua.addEventListener('blur',()=>{
-        let i = 0;
-        let totalPorcentaje = $('#totalPorcentaje').val();
-        let agua = $('#porcentajeAgua').val();
-        let porcentajeTotal = parseFloat(totalPorcentaje) + parseFloat(agua);
-        $('.porcentajes').each(()=>{
-          let porcentaje = parseFloat($('#porcentaje' + i).val());
-          let precioTC = $('#precio' + i + ' input').val();
-
-
-          let porcentajeTC = (porcentaje * 100) / porcentajeTotal;
-          $('#porcentajeTC' + i).val(porcentajeTC.toFixed(2));
-
-          let precioPorcentaje = calcularPrecioPorcentaje(precioTC,porcentajeTC);
-
-          $('#precioPor' + i).val(precioPorcentaje.toFixed(2));
-          i += 1; 
-        })
-
-        $('#porcentajeAguaTC').val(((agua*100)/porcentajeTotal).toFixed(2)); 
-      })
-
-
-      $(document).ready(function(){
-      var totalPorcentaje = calculoPorTotal();
-       if (totalPorcentaje < 100) {
-            $('.botonCarga').attr('disabled',true);
-            console.log('ready TRUE');
-        }
-
-        // OTRO TIPO DE FORMULA
-        $(".tipoFormulaOtro").hide();
-        $("#selectTipoFormula").change(function(){
-          $(".tipoFormulaOtro").hide();
-          var tipo = $(this).val();
-          if (tipo == "otro") {
-              $("#mostrarOtro").show();
-          }
-          });
-        // OCULTAR MODAL 
-        $(".modal").each(function(){
-          $(this).css('z-index',0);
-          })  
-        
-
-        // OTRO OPERARIO
-        $(".otroOperario").hide();
-        $("#inputOperario").change(function(){
-          $(".otroOperario").hide();
-          var causa = $(this).val();
-          if (causa == "otro") {
-              $("#mostrarOperario").show();
-          }
-        });
-
-        // OTRO OPERARIO MODAL
-        $(".otroOperario").hide();
-        $("#inputOperarioModal").change(function(){
-        $(".otroOperario").hide();
-        var causa = $(this).val();
-        if (causa == "otro") {
-            $("#mostrarOperarioModal").show();
-        }
-        });
-
-
-
-      });
-
-
-      <?php
-        $sqlInsumo = "SELECT * FROM insumos ORDER BY insumo ASC";
-        $queryInsumo = mysqli_query($conexion,$sqlInsumo);
-        $insumos = array();
-        while ($resultado = mysqli_fetch_array($queryInsumo)) {
-          $insumos[] = $resultado['insumo'];
-        }
-        $insumos = array_unique($insumos);
-        $insumos = array_values($insumos);
-      ?>
-        
-        var contador = 0;
-        var div;
-        <?php if ($accionValido) {
-                if ($accion == 'modificar') { ?>
-                  $(document).ready(function(){
-
-                    $('.select-insumos').each(function(){
-                    contador++;
-                  });
-                });
-         <?php }
-              }else{ ?>
-                contador = 1;  
-              <?php
-              }
-              ?>
-
-        $('.btn-agregarProducto').click(function( event ) {
-           div = '<div class="row-fluid producto' + contador +'">';
-
-          div += '<div class="span3">';
-
-          div += '<select class="form-control select-insumos input-medium" name="producto' + contador +'" id="producto' + contador + '" onblur="CargarProductos(this.value,this.id);">';
-
-          div += '<option value="">Seleccionar Insumo</option>';
-
-          <?php 
-          for ($i=0; $i < sizeof($insumos) ; $i++) { 
-          $ultimaFecha = ultimaFecha($insumos[$i],$conexion);
-          $resultadoInsumo = traeDatos($ultimaFecha,$insumos[$i],$conexion);
-          ?>
-          div += '<option value="<?php echo $resultadoInsumo['id'];?>"><?php echo $resultadoInsumo['insumo'];?></option>';
-          <?php } ?>
-          div += '</select></div>';
-
-          div += '<div class="span2">';
-
-          div += '<input type="text" class="form-control input-small porcentajes" id="porcentaje' + contador + '" name="porcentaje' + contador + '" value="0" onblur="controlCero(\'porcentaje' + contador + '\')" disabled="true" required/></div>';
-
-          div += '<div class="span2">';
-
-          div += '<input type="text" style="font-weight: bold" class="form-control input-small porcentajesTC" id="porcentajeTC' + contador + '" value="0" readonly/></div>';
-
-          div += '<div class="span2" id="precio' + contador + '"></div>';
-
-          div += '<div class="span2"><input type="text" style="font-weight: bold" value="0" id="precioPor' + contador + '" class="input-small importe_linea" readonly></div>'; 
-
-          div += '<div class="span1"><span class="icon-bin2" style="cursor: pointer;" onclick="eliminarProducto(\'producto' + contador + '\')"></span></div>';
-         $('.contenedor-producto').append(div)
-           contador ++; 
-        });
-
-
-        <?php
-        require_once('js/raciones.php');
- 
-        if ($accionValido) {
-          if ($accion == "modificar") { ?>
-            $(document).ready(function(){
-              var contadorInsumo = 0;
-              var contadorAjax = 0;
-              var totalPorcentaje = 0;
-              
-              // PORCENTAJES
-                totalPorcentaje = calculoPorTotal();
-                $('#totalPorcentaje').val(totalPorcentaje.toFixed(0));
-                var agua = $('#porcentajeAgua').val();
-              
-              // PORCENTAJES CON AGUA
-                cargarPorcentajeConAgua();
-                $('#porcentajeAguaTC').val(calcularPorcentajeConAgua(agua,agua,totalPorcentaje).toFixed(2));
-
-              // PRECIO TC
-                $('.select-insumos').each(function(){
-                  var idProducto = $(this).val();
-                  var contenedorPrecio = '#precio' + contadorInsumo;
-
-                  $.ajax({
-                      type: "POST",
-                      url: 'consulta.php',
-                      data: 'insumo='+idProducto,
-                      success: function(resp){
-                          $(contenedorPrecio).html(resp);
-                      }
-                  });
-                  
-                  let precioPor = $('#precio' + contadorInsumo + ' input[name=precioTC]').val();
-                  contadorInsumo++;
-                });
-
-              // PRECIO %
-                cargarPreciosConAgua(agua,totalPorcentaje);
-
-            });              
-        <?php 
-          }
-        }?>
-
-        function cambiar(id,info){
-          var pdrs = document.getElementById(id).files[0].name;
-          document.getElementById(info).innerHTML = pdrs;
-        }
-            
 
         var mixer = (document).getElementById('selectMixer');
         
@@ -683,13 +706,21 @@ if ($accionValido) {
 
         });
 
+        $('.collapse').css('display','block');
+        
 
+        $(document).ready(function() {
+            $('.mi-selector').select2();
+        });
+        
     </script>    
     <!-- Placed at the end of the document so the pages load faster -->
 
     <script src="js/functions.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/functions.js"></script>
+    <script src="js/formulas.js"></script>
+    <script src="js/mixer.js"></script>
+    <script src="js/insumos.js"></script>
     
   </body>
 </html>

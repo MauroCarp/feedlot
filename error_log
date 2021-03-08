@@ -18991,3 +18991,44 @@
 [05-Feb-2020 00:43:15 UTC] PHP Notice:  Undefined index: feedlot in /home/fug271mhgizk/public_html/includes/init_session.php on line 11
 [05-Feb-2020 02:51:27 UTC] PHP Notice:  Undefined index: feedlot in /home/fug271mhgizk/public_html/includes/init_session.php on line 11
 [05-Feb-2020 03:34:43 UTC] PHP Notice:  Undefined index: feedlot in /home/fug271mhgizk/public_html/includes/init_session.php on line 11
+[22-Dec-2020 20:49:15 UTC] PHP Notice:  Undefined index: feedlot in /home/fug271mhgizk/public_html/feedlot/includes/init_session.php on line 11
+[22-Dec-2020 20:49:15 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/fug271mhgizk/public_html/feedlot/includes/conexion.php on line 8
+[22-Dec-2020 20:49:15 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/fug271mhgizk/public_html/feedlot/alertas.php on line 15
+[22-Dec-2020 20:49:15 UTC] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, boolean given in /home/fug271mhgizk/public_html/feedlot/alertas.php on line 16
+[22-Dec-2020 20:49:15 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/fug271mhgizk/public_html/feedlot/alertas.php on line 17
+[22-Dec-2020 20:49:15 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/fug271mhgizk/public_html/feedlot/includes/conexion.php on line 8
+[22-Dec-2020 20:49:15 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/fug271mhgizk/public_html/feedlot/login.php on line 97
+[22-Dec-2020 20:49:15 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/fug271mhgizk/public_html/feedlot/login.php on line 98
+[22-Dec-2020 20:52:07 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/fug271mhgizk/public_html/feedlot/includes/conexion.php on line 8
+[22-Dec-2020 20:52:07 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/fug271mhgizk/public_html/feedlot/login.php on line 97
+[22-Dec-2020 20:52:07 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/fug271mhgizk/public_html/feedlot/login.php on line 98
+[03-Feb-2021 22:10:10 UTC] PHP Notice:  Undefined index: feedlot in /home/fug271mhgizk/public_html/feedlot/includes/init_session.php on line 11
+[04-Feb-2021 17:00:53 UTC] PHP Notice:  Undefined index: feedlot in /home/fug271mhgizk/public_html/feedlot/includes/init_session.php on line 11
+[04-Feb-2021 19:29:07 UTC] PHP Notice:  Undefined index: feedlot in /home/fug271mhgizk/public_html/feedlot/includes/init_session.php on line 11
+[04-Feb-2021 19:31:00 UTC] PHP Notice:  Undefined variable: sql in /home/fug271mhgizk/public_html/feedlot/filtroOperaciones.ajax.php on line 121
+[05-Feb-2021 20:22:39 UTC] PHP Notice:  Undefined index: feedlot in /home/fug271mhgizk/public_html/feedlot/includes/init_session.php on line 11
+[05-Feb-2021 20:35:34 UTC] PHP Notice:  Undefined index: feedlot in /home/fug271mhgizk/public_html/feedlot/includes/init_session.php on line 11
+[05-Feb-2021 20:38:53 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; OLERead has a deprecated constructor in /home/fug271mhgizk/public_html/feedlot/lib/excel/php-excel-reader/excel_reader2.php on line 95
+[05-Feb-2021 20:38:53 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; Spreadsheet_Excel_Reader has a deprecated constructor in /home/fug271mhgizk/public_html/feedlot/lib/excel/php-excel-reader/excel_reader2.php on line 312
+[05-Feb-2021 20:42:47 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; OLERead has a deprecated constructor in /home/fug271mhgizk/public_html/feedlot/lib/excel/php-excel-reader/excel_reader2.php on line 95
+[05-Feb-2021 20:42:47 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; Spreadsheet_Excel_Reader has a deprecated constructor in /home/fug271mhgizk/public_html/feedlot/lib/excel/php-excel-reader/excel_reader2.php on line 312
+[05-Feb-2021 20:42:47 UTC] PHP Notice:  Undefined variable: ruta in /home/fug271mhgizk/public_html/feedlot/ingresoMixer1.php on line 394
+[05-Feb-2021 20:42:47 UTC] PHP Warning:  unlink(): No such file or directory in /home/fug271mhgizk/public_html/feedlot/ingresoMixer1.php on line 394
+[05-Feb-2021 20:46:41 UTC] PHP Notice:  Undefined index: feedlot in /home/fug271mhgizk/public_html/feedlot/includes/init_session.php on line 11
+[05-Feb-2021 20:51:02 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; OLERead has a deprecated constructor in /home/fug271mhgizk/public_html/feedlot/lib/excel/php-excel-reader/excel_reader2.php on line 95
+[05-Feb-2021 20:51:02 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; Spreadsheet_Excel_Reader has a deprecated constructor in /home/fug271mhgizk/public_html/feedlot/lib/excel/php-excel-reader/excel_reader2.php on line 312
+[05-Feb-2021 20:54:36 UTC] PHP Notice:  Undefined index: feedlot in /home/fug271mhgizk/public_html/feedlot/includes/init_session.php on line 11
+[05-Feb-2021 20:56:52 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; OLERead has a deprecated constructor in /home/fug271mhgizk/public_html/feedlot/lib/excel/php-excel-reader/excel_reader2.php on line 95
+[05-Feb-2021 20:56:52 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; Spreadsheet_Excel_Reader has a deprecated constructor in /home/fug271mhgizk/public_html/feedlot/lib/excel/php-excel-reader/excel_reader2.php on line 312
+[05-Feb-2021 20:56:52 UTC] PHP Notice:  Undefined variable: ruta in /home/fug271mhgizk/public_html/feedlot/ingresoMixer1.php on line 394
+[05-Feb-2021 20:56:52 UTC] PHP Warning:  unlink(): No such file or directory in /home/fug271mhgizk/public_html/feedlot/ingresoMixer1.php on line 394
+[05-Feb-2021 20:59:10 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; OLERead has a deprecated constructor in /home/fug271mhgizk/public_html/feedlot/lib/excel/php-excel-reader/excel_reader2.php on line 95
+[05-Feb-2021 20:59:10 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; Spreadsheet_Excel_Reader has a deprecated constructor in /home/fug271mhgizk/public_html/feedlot/lib/excel/php-excel-reader/excel_reader2.php on line 312
+[05-Feb-2021 21:07:38 UTC] PHP Notice:  Undefined index: feedlot in /home/fug271mhgizk/public_html/feedlot/includes/init_session.php on line 11
+[05-Feb-2021 21:07:58 UTC] PHP Notice:  Undefined index: feedlot in /home/fug271mhgizk/public_html/feedlot/includes/init_session.php on line 11
+[05-Feb-2021 21:09:09 UTC] PHP Notice:  Undefined index: seccion in /home/fug271mhgizk/public_html/feedlot/verTropa.php on line 44
+[05-Feb-2021 21:12:18 UTC] PHP Notice:  Undefined index: seccion in /home/fug271mhgizk/public_html/feedlot/stock.php on line 526
+[05-Feb-2021 21:12:18 UTC] PHP Notice:  Undefined index: seccion in /home/fug271mhgizk/public_html/feedlot/stock.php on line 531
+[05-Feb-2021 21:12:18 UTC] PHP Notice:  Undefined index: seccion in /home/fug271mhgizk/public_html/feedlot/stock.php on line 537
+[05-Feb-2021 21:23:08 UTC] PHP Notice:  Undefined index: seccion in /home/fug271mhgizk/public_html/feedlot/verTropa.php on line 44
+[06-Feb-2021 14:11:47 UTC] PHP Notice:  Undefined index: feedlot in /home/fug271mhgizk/public_html/feedlot/includes/init_session.php on line 11

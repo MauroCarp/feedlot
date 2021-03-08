@@ -4,6 +4,7 @@ include("includes/conexion.php");
 include("includes/funciones.php");
 require_once('lib/excel/php-excel-reader/excel_reader2.php');
 require_once('lib/excel/SpreadsheetReader.php');
+
 if( isset($_POST["submit"]) ){
 
     $mixer = $_POST['mixer'];
@@ -20,11 +21,21 @@ if( isset($_POST["submit"]) ){
         $Reader = new SpreadsheetReader($ruta);	
 		$sheetCount = count($Reader->sheets());
 
-        
+        if($sheetCount > 1){
+
+            echo "<script>
+            
+            alert('El archivo cargado no es del Mixer Autoconsumo');
+            
+            window.location = 'raciones.php';
+            
+            </script>";
+            
+            die();
+
+        }
 
         for($i=0;$i<$sheetCount;$i++){
-            
-            if ($i == 1) {
             
                 $Reader->ChangeSheet($i);
 
@@ -136,7 +147,7 @@ if( isset($_POST["submit"]) ){
                         
                         $loteIngrediente = ($accion == 'Descarga') ? trim(substr($loteIngrediente,5)) : $loteIngrediente; 
 
-                        var_dump($loteIngrediente);
+                        // var_dump($loteIngrediente);
 
                         $cantidad = mysqli_real_escape_string($conexion,$Row[9]);
  
@@ -161,7 +172,7 @@ if( isset($_POST["submit"]) ){
                         
                         $loteIngrediente = ($accion == 'Descarga') ? trim(substr($loteIngrediente,5)) : $loteIngrediente; 
 
-                        var_dump($loteIngrediente);
+                        // var_dump($loteIngrediente);
 
                         $cantidad = mysqli_real_escape_string($conexion,$Row[11]);
  
@@ -187,7 +198,7 @@ if( isset($_POST["submit"]) ){
                         
                         $loteIngrediente = ($accion == 'Descarga') ? trim(substr($loteIngrediente,5)) : $loteIngrediente; 
 
-                        var_dump($loteIngrediente);
+                        // var_dump($loteIngrediente);
 
                         $cantidad = mysqli_real_escape_string($conexion,$Row[13]);
  
@@ -213,7 +224,7 @@ if( isset($_POST["submit"]) ){
                         
                         $loteIngrediente = ($accion == 'Descarga') ? trim(substr($loteIngrediente,5)) : $loteIngrediente; 
 
-                        var_dump($loteIngrediente);
+                        // var_dump($loteIngrediente);
 
                         $cantidad = mysqli_real_escape_string($conexion,$Row[15]);
  
@@ -239,7 +250,7 @@ if( isset($_POST["submit"]) ){
                         
                         $loteIngrediente = ($accion == 'Descarga') ? trim(substr($loteIngrediente,5)) : $loteIngrediente; 
 
-                        var_dump($loteIngrediente);
+                        // var_dump($loteIngrediente);
 
                         $cantidad = mysqli_real_escape_string($conexion,$Row[17]);
  
@@ -265,7 +276,7 @@ if( isset($_POST["submit"]) ){
 
                         $loteIngrediente = ($accion == 'Descarga') ? trim(substr($loteIngrediente,5)) : $loteIngrediente; 
 
-                        var_dump($loteIngrediente);
+                        // var_dump($loteIngrediente);
 
                         $cantidad = mysqli_real_escape_string($conexion,$Row[19]);
  
@@ -291,7 +302,7 @@ if( isset($_POST["submit"]) ){
                                 
                         $loteIngrediente = ($accion == 'Descarga') ? trim(substr($loteIngrediente,5)) : $loteIngrediente; 
 
-                        var_dump($loteIngrediente);
+                        // var_dump($loteIngrediente);
 
                         $cantidad = mysqli_real_escape_string($conexion,$Row[21]);
  
@@ -317,7 +328,7 @@ if( isset($_POST["submit"]) ){
                         
                         $loteIngrediente = ($accion == 'Descarga') ? trim(substr($loteIngrediente,5)) : $loteIngrediente; 
 
-                        var_dump($loteIngrediente);
+                        // var_dump($loteIngrediente);
 
                         $cantidad = mysqli_real_escape_string($conexion,$Row[23]);
 
@@ -351,7 +362,7 @@ if( isset($_POST["submit"]) ){
 
                 }
                 
-            }
+            
             
         }
         
@@ -360,10 +371,10 @@ if( isset($_POST["submit"]) ){
     unlink($ruta);
 
     
-    // echo '<script>
-	// 			window.location = "raciones.php";
+    echo '<script>
+				window.location = "raciones.php";
 
-    //     </script>';
+        </script>';
 
 }
 

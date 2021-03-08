@@ -418,7 +418,7 @@ if ($seccionValido) {
     </div>
     <div class="container" style="padding-top: 50px;">
       <h1 style="display: inline-block;">STOCK</h1>
-      <h4 style="display: inline-block;float: right;"><?php echo "Fecha: ".$fechaDeHoy;?></h4>
+      <h4 style="display: inline-block;float: right;"><?php echo "<b>".$feedlot."</b> -  Fecha: ".$fechaDeHoy;?></h4>
       <div class="hero-unit" style="padding-top: 10px;margin-bottom: 5px;">
         <h2>Stock: <?php echo number_format($stock,0,",",".");?> Animales</h2>
 

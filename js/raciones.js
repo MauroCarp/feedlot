@@ -42,11 +42,23 @@ function controlCero(id){
       var contador;
       var precioTC;
       var precioPor;
-      porcentaje = $('#' + id).val();
+
+      porcentaje = $('#' + id).val(); 
+
+      console.log('PORCENTAJE' + porcentaje);
+
       contador = id.substring(10,12);
+
       precioTC = $('#precio' + contador + ' input[name=precioTC]').val();
+
+      console.log('PRECIO TC'+ precioTC);
+
       precioPor = ((porcentaje*precioTC)/100);
+
       precioPor = precioPor.toFixed(2);
+
+      console.log('PRECIO %'+ precioPor);
+      
       $('#precioPor' + contador).val(precioPor);
 
       $('#porcentajeTC' + contador).val(porcentaje);
@@ -56,6 +68,7 @@ function controlCero(id){
         $('.botonCarga').attr('disabled',true);
         alert("Los porcentajes suman un total mayor a 100%");
       }
+
       if (totalPorcentaje < 100) {
         $('.botonCarga').attr('disabled',true);
         console.log('menor TRUE');
@@ -65,6 +78,7 @@ function controlCero(id){
         $('.botonCarga').attr('disabled',false);
         console.log('igual TRUE');
       }
+      
 }
 
 var contadorInsumo;
@@ -163,27 +177,38 @@ function cargarMS(id){
       var precioPor = 0;
       var porcentajeMS = 0;
       var precioMS = 0;
+
         $(".precioPorc" + id).each(function(){
+
           precioPor = $(this).text();
+
           precioPor = $.trim(precioPor);
+
           precioPor = parseFloat(precioPor.substring(2));
+
           porcentajeMS = $(".porcMS" + id + "_" + contador).text();
+
           porcentajeMS = $.trim(porcentajeMS);
+
           porcentajeMS = parseFloat(porcentajeMS.substring(0,2));
+
           
           precioMS = ((100 * precioPor) / porcentajeMS);
           contador++;
-        })
+        });
 
 
         var totalPMS = 0; 
+
         var pMS = 0;
+
         $(".totalMS" + id).each(function(){
           pMS = $(this).text();
           pMS = $.trim(pMS);
           pMS = parseFloat(pMS.substring(0,5).replace(",","."));
           totalPMS += pMS;
-        })
+        });
+
           precioKilo = $("#precioKilo" + id).text();
           precioKilo = parseFloat(precioKilo.replace(',','.'));
           totalMS = (100 * precioKilo) / totalPMS;
@@ -302,7 +327,10 @@ function zindexModal(id){
 var div;
 var btnAgregarProducto = document.getElementsByClassName('btn-agregarProducto');
 btnAgregarProducto.addEventListener('click',agregarProducto());
+
+
 $('.btn-agregarProducto').click(function() {
+
 div = '<div class="row-fluid producto' + contador +'">';
 
 div += '<div class="span3">';

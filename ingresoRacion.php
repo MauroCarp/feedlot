@@ -42,7 +42,7 @@
 
                 <option value="mixer1">456ST</option>
 
-                <option value="mixer2">Mixer 2</option>
+                <option value="mixer2">Autoconsumo</option>
 
               </select>
             
@@ -161,7 +161,7 @@
 
                   <td>".($a+1)."</td>
                   
-                  <td>".formatearFecha($fechaOperaciones[$a])."</td>
+                  <td><b>".formatearFecha($fechaOperaciones[$a])."</b></td>
 
                   <td>
 

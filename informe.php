@@ -76,7 +76,7 @@ if($feedlot == 'Acopiadora Pampeana'){
     </div>
     <div class="container" style="padding-top: 50px;">
       <h1 style="display: inline-block;">STOCK</h1>
-      <h4 style="display: inline-block;float: right;"><?php echo "Fecha: ".$fechaDeHoy;?></h4>
+      <h4 style="display: inline-block;float: right;"><?php echo "<b>".$feedlot."</b> -  Fecha: ".$fechaDeHoy;?></h4>
       <div class="hero-unit" style="padding-top: 10px;margin-bottom: 5px;">
         <?php if (!$comparacionValido) { ?>
         <h3>Periodo: <?php echo formatearFecha($desde)." / ".formatearFecha($hasta);?></h3>

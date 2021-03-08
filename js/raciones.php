@@ -1,3 +1,4 @@
+/*
 function calcularPrecioPorcentaje(precioTC,porcentajeTC){
     let precioPorcentaje = (porcentajeTC * precioTC) / 100;
 	return precioPorcentaje;
@@ -34,6 +35,9 @@ function controlCero(id){
 
       /// SE CALCULA EL PORCENTAJE TOTAL   
       var totalPorcentaje = calculoPorTotal();
+
+      console.log('TOTAL PORCENTAJE' + totalPorcentaje);
+
       $('#totalPorcentaje').val(totalPorcentaje);
 
 
@@ -43,10 +47,19 @@ function controlCero(id){
       var precioTC;
       var precioPor;
       porcentaje = $('#' + id).val();
+
+      console.log('PORCENTAJE' + porcentaje);
+
       contador = id.substring(10,12);
       precioTC = $('#precio' + contador + ' input[name=precioTC]').val();
+
+      console.log('PRECIO TC' + precioTC);
+
       precioPor = ((porcentaje*precioTC)/100);
       precioPor = precioPor.toFixed(2);
+
+      console.log('PRECIO %' + precioPor);
+
       $('#precioPor' + contador).val(precioPor);
 
       $('#porcentajeTC' + contador).val(porcentaje);
@@ -409,8 +422,13 @@ var calcularPrecioPorcentaje = (precioTC,porcentajeTC)=>{
 }
 
 function imprimirMixer(idRacion){
+
   id = idRacion;
+  
   totalMS = parseFloat($('#kilosMS' + id).text());
+  
   window.open('imprimir/mixer.php?id=' + id + '&totalMS=' + totalMS);
+
 }
 
+*/

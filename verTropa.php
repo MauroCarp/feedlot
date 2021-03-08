@@ -146,7 +146,7 @@ if ($seccion == 'egresos') {
     </div>
     <div class="container" style="padding-top: 50px;">
       <h1 style="display: inline-block;">STOCK</h1>
-      <h4 style="display: inline-block;float: right;"><?php echo "Fecha: ".$fechaDeHoy;?></h4>
+      <h4 style="display: inline-block;float: right;"><?php echo "<b>".$feedlot."</b> -  Fecha: ".$fechaDeHoy;?></h4>
       <div class="hero-unit" style="padding-top: 10px;margin-bottom: 5px;">
         <h2>Tropa <?php echo $tropa;?></h2>
 

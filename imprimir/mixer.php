@@ -35,11 +35,19 @@ function precioInsumo($productoN,$productoResultado,$conexion){
     return $resultado;
 }
 
-function porceTC($agua,$porcentaje){
-    $porceTotal = 100 + $agua;
-    $porceTC = ($porcentaje * 100) / $porceTotal;
+function porceMS($id_producto,$porcentaje,$conexion){
 
-    return $porceTC;
+    $sql = "SELECT porceMS FROM insumos WHERE id = '$id_producto'";
+
+    $query = mysqli_query($conexion,$sql);
+    
+    $resultado = mysqli_fetch_array($query);
+
+    $porceMSinsumo = $resultado['porceMS'];
+
+    $porceMS = $porcentaje * ($porceMSinsumo / 100);
+
+    return $porceMS;
 }
 
 function tomaPorcentajeMS($productoN,$productoResultado,$conexion){
@@ -53,13 +61,13 @@ function tomaPorcentajeMS($productoN,$productoResultado,$conexion){
 $id = $_GET['id'];
 $totalMS = $_GET['totalMS'];
 
-$sqlInsumos = "SELECT tipo,nombre,raciones.fecha as fecha, kilos, margen, redondeo,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,por1,por2,por3,por4,por5,por6,por7,por8,por9,por10,por11,agua FROM raciones LEFT JOIN formulas ON raciones.formula = formulas.id WHERE raciones.id = '$id'";
+$sqlInsumos = "SELECT tipo,nombre,mixer.fecha as fecha, kilos, margen, redondeo,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,por1,por2,por3,por4,por5,por6,por7,por8,por9,por10,por11 FROM mixer LEFT JOIN formulas ON mixer.formula = formulas.id WHERE mixer.id = '$id'";
 $queryInsumos = mysqli_query($conexion,$sqlInsumos);
 echo mysqli_error($conexion);
 $filaInsumos = mysqli_fetch_array($queryInsumos);
 
 $totalPorcentaje = 0;
-$totalTC = 0;
+$totalMS = 0;
 $totalKilos = 0;
 $totalFinal = 0;
 $totalDiferencia = 0;
@@ -95,7 +103,7 @@ $redondeosMixer = explode(",", $redondeosMixer);
     $pdf->SetFont('helvetica','B',10);
     $pdf->Cell(30,9,'Producto',0,0,'L',1);
     $pdf->Cell(25,9,'% en Dieta',0,0,'C',1);
-    $pdf->Cell(20,9,'% TC',0,0,'C',1);
+    $pdf->Cell(20,9,'% MS',0,0,'C',1);
     $pdf->Cell(20,9,'Kilos',0,0,'C',1);
     $pdf->Cell(20,9,'Kg Real',0,0,'C',1);
     $pdf->Cell(25,9,'Dieta Final',0,0,'C',1);
@@ -114,7 +122,6 @@ $redondeosMixer = explode(",", $redondeosMixer);
     $pdf->SetFillColor(245,245,245);
     $pdf->Cell(25,9,$filaInsumos['por1'].' %',0,0,'C',1);
     $pdf->SetFillColor(236,236,236);
-    $pdf->Cell(20,9,number_format(porceTC($filaInsumos['agua'],$filaInsumos['por1']),2).' %',0,0,'C',1);
     $pdf->SetFillColor(245,245,245);
     $pdf->Cell(20,9,round(($filaInsumos['por1']*$filaInsumos['kilos'])/100,2).' Kg',0,0,'C',1);
     $pdf->SetFillColor(236,236,236);
@@ -131,14 +138,16 @@ $redondeosMixer = explode(",", $redondeosMixer);
     $pdf->Cell(20,9,round(((tomaPorcentajeMS('p1',$filaInsumos['p1'],$conexion) * $redondeosMixer[0]) / 100),2).' Kg',0,0,'C',1);                     
     $pdf->SetFillColor(236,236,236);
     $kilosMS = round(((tomaPorcentajeMS('p1',$filaInsumos['p1'],$conexion) * $redondeosMixer[0]) / 100),2);
+    var_dump($kilosMS,$totalMS);
     $pdf->Cell(35,9,number_format((($kilosMS * 100) / $totalMS),2).' %',0,1,'C',1);                          
     
     $totalPorcentaje += $filaInsumos['por1'];
-    $totalTC += number_format(porceTC($filaInsumos['agua'],$filaInsumos['por1']),2);
+    $totalMS += number_format(porceMS($filaInsumos['p1'],$filaInsumos['por1'],$conexion),2);
     $totalKilos += round(($filaInsumos['por1']*$filaInsumos['kilos'])/100,2);
     $totalFinal += $redondeosMixer[0];
     $totalDiferencia += $redondeosMixer[0   ] - (round(($filaInsumos['por1'] * $filaInsumos['kilos'])/100,2));
-    $totalPorcentajeMS += number_format((($kilosMS * 100) / $totalMS),2);
+
+    $totalPorcentajeMS += (($kilosMS * 100) / $totalMS);
 
     for ($i=1; $i < 11 ; $i++) { 
         $producto = "p".($i+1);
@@ -150,7 +159,7 @@ $redondeosMixer = explode(",", $redondeosMixer);
             $pdf->SetFillColor(245,245,245);
             $pdf->Cell(25,9,$filaInsumos[$porcentaje]." %",0,0,'C',1);
             $pdf->SetFillColor(236,236,236);
-            $pdf->Cell(20,9,number_format(porceTC($filaInsumos['agua'],$filaInsumos[$porcentaje]),2).' %',0,0,'C',1);
+            $pdf->Cell(20,9,number_format(porceMS($filaInsumos[$producto],$filaInsumos[$porcentaje],$conexion),2).' %',0,0,'C',1);
             $pdf->SetFillColor(245,245,245);
             $pdf->Cell(20,9,round(($filaInsumos[$porcentaje]*$filaInsumos['kilos'])/100,2).' Kg',0,0,'C',1);
             $pdf->SetFillColor(236,236,236);
@@ -171,39 +180,13 @@ $redondeosMixer = explode(",", $redondeosMixer);
             $pdf->Cell(35,9,number_format((($kilosMS * 100) / $totalMS),2).' %',0,1,'C',1);      
 
             $totalPorcentaje += $filaInsumos[$porcentaje];
-            $totalTC += number_format(porceTC($filaInsumos['agua'],$filaInsumos[$porcentaje]),2);
+            $totalMS += number_format(porceMS($filaInsumos[$producto],$filaInsumos[$porcentaje],$conexion),2);
             $totalKilos += round(($filaInsumos[$porcentaje]*$filaInsumos['kilos'])/100,2);
             $totalFinal += $redondeosMixer[$i];
             $totalDiferencia += $redondeosMixer[$i] - (round(($filaInsumos[$porcentaje] * $filaInsumos['kilos'])/100,2));
-            $totalPorcentajeMS += number_format((($kilosMS * 100) / $totalMS),2);                    
+            $totalPorcentajeMS += (($kilosMS * 100) / $totalMS);                    
         }
     }
-    $pdf->SetFillColor(236,236,236);
-    $pdf->Cell(30,9,'Agua',0,0,'L',1);
-    $pdf->SetFillColor(245,245,245);
-    $pdf->Cell(25,9,$filaInsumos['agua']." %",0,0,'C',1);
-    $pdf->SetFillColor(236,236,236);
-    $pdf->Cell(20,9,number_format(porceTC($filaInsumos['agua'],$filaInsumos['agua']),2).' %',0,0,'C',1);
-    $pdf->SetFillColor(245,245,245);
-    $pdf->Cell(20,9,round(($filaInsumos['agua']*$filaInsumos['kilos'])/100,2).' Kg',0,0,'C',1);
-    $pdf->SetFillColor(236,236,236);
-    $pdf->Cell(20,9,'',0,0,'L',1);
-    $pdf->SetFillColor(245,245,245);
-    $pdf->Cell(25,9,'',0,0,'L',1);
-    $pdf->SetFillColor(236,236,236);
-    $pdf->Cell(20,9,'',0,0,'L',1);
-    $pdf->SetFillColor(245,245,245);
-    $pdf->Cell(15,9,'',0,0,'L',1);
-    $pdf->SetFillColor(236,236,236);
-    $pdf->Cell(30,9,'',0,0,'C',1);
-    $pdf->SetFillColor(245,245,245);
-    $pdf->Cell(20,9,'',0,0,'L',1);
-    $pdf->SetFillColor(236,236,236);
-    $pdf->Cell(35,9,'',0,1,'C',1);
-
-
-    $totalPorcentaje += $filaInsumos['agua'];
-    $totalTC += number_format(porceTC($filaInsumos['agua'],$filaInsumos['agua']),2);
 
     $pdf->SetFont('helvetica','B',10);
     $pdf->SetFillColor(0,0,0);
@@ -211,7 +194,7 @@ $redondeosMixer = explode(",", $redondeosMixer);
     $pdf->SetFillColor(247,247,247);
     $pdf->Cell(30,9,'Totales',0,0,'L',1);
     $pdf->Cell(25,9,$totalPorcentaje.' %',0,0,'C',1);
-    $pdf->Cell(20,9,$totalTC.' %',0,0,'C',1);
+    $pdf->Cell(20,9,$totalMS.' %',0,0,'C',1);
     $pdf->Cell(20,9,$totalKilos.' Kg',0,0,'C',1);
     $pdf->Cell(20,9,$totalFinal.' Kg',0,0,'C',1);
     $pdf->Cell(25,9,'',0,0,'L',1);

@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
 include("../includes/init_session.php");
 include("../includes/conexion.php");
 include("../lib/fpdf/fpdf.php");
@@ -35,11 +33,19 @@ function precioInsumo($productoN,$productoResultado,$conexion){
     return $resultado;
 }
 
-function porceTC($agua,$porcentaje){
-    $porceTotal = 100 + $agua;
-    $porceTC = ($porcentaje * 100) / $porceTotal;
+function porceMS($id_producto,$porcentaje,$conexion){
 
-    return $porceTC;
+    $sql = "SELECT porceMS FROM insumos WHERE id = '$id_producto'";
+
+    $query = mysqli_query($conexion,$sql);
+    
+    $resultado = mysqli_fetch_array($query);
+
+    $porceMSinsumo = $resultado['porceMS'];
+
+    $porceMS = $porcentaje * ($porceMSinsumo / 100);
+
+    return $porceMS;
 }
 
 function tomaPorcentajeMS($productoN,$productoResultado,$conexion){
@@ -51,12 +57,16 @@ function tomaPorcentajeMS($productoN,$productoResultado,$conexion){
 }
 
 $id = $_GET['id'];
+
 $precioPor = $_GET['precioPor'];
+
 $totalMS = $_GET['totalMS'];
 
 $sql = "SELECT * FROM formulas WHERE id = '$id'";
 $query = mysqli_query($conexion,$sql);
 $fila = mysqli_fetch_array($query);
+
+$precioInsumoTotal = 0;
 
     $pdf = new FPDF('P','mm','A4'); 
     $pdf->AddPage();
@@ -67,13 +77,12 @@ $fila = mysqli_fetch_array($query);
     $pdf->SetAutoPageBreak(1,1);
     $pdf->SetFont('Helvetica','B',11);
     $pdf->SetX(10);
-    $pdf->Image('../img/logo.png',10,10,30);
+    $pdf->Image('../img/logoAcopiadora.jpg',10,10,30);
     $pdf->Cell(130,7,utf8_decode(''),0,0,'L',0);
     $pdf->Cell(60,7,utf8_decode('Jorge Cornale'),0,1,'R',0);
     $pdf->Ln(6);
     $pdf->SetFont('Helvetica','B',18);
     $pdf->Cell(190,10,'Feedlot: '.$feedlot,0,1,'L',0);
-    $pdf->Cell(190,10,utf8_decode('Formula '.$fila['tipo'].' - '.$fila['nombre']),0,1,'L',0);
     $pdf->SetFont('helvetica','B',10);
     $pdf->SetX(10);
     $pdf->Cell(40,8,'Fecha Realizada: '.formatearFecha($fila['fecha']),0,1,'L',0);
@@ -86,9 +95,9 @@ $fila = mysqli_fetch_array($query);
     $pdf->SetFont('helvetica','B',10);
     $pdf->Cell(40,9,'Producto',0,0,'L',0);
     $pdf->Cell(25,9,'% en la Dieta',0,0,'C',0);
-    $pdf->Cell(25,9,'% TC',0,0,'C',0);
+    $pdf->Cell(25,9,'% MS',0,0,'C',0);
     $pdf->Cell(25,9,'Precio Insumo',0,0,'C',0);
-    $pdf->Cell(25,9,'$/Kg MF',0,0,'C',0);
+    $pdf->Cell(25,9,'$/Kg MS',0,0,'C',0);
     $pdf->Cell(25,9,'% MS Insumo',0,0,'C',0);
     $pdf->Cell(30,9,'% MS en la Dieta',0,1,'C',0);
     $pdf->SetX(10);
@@ -100,9 +109,14 @@ $fila = mysqli_fetch_array($query);
     $pdf->SetFillColor(236,236,236);
     $pdf->Cell(25,9,$fila['por1'].' %',0,0,'C',1);
     $pdf->SetFillColor(247,247,247);
-    $pdf->Cell(25,9,formatearNum(porceTC($fila['agua'],$fila['por1']))." %",0,0,'C',1);
+    $pdf->Cell(25,9,formatearNum(porceMS($fila['p1'],$fila['por1'],$conexion))." %",0,0,'C',1);
     $pdf->SetFillColor(236,236,236);
-    $pdf->Cell(25,9,'$ '.precioInsumo('p1',$fila['p1'],$conexion),0,0,'C',1);
+
+    $precioInsumo = precioInsumo('p1',$fila['p1'],$conexion);
+
+    $precioInsumoTotal += $precioInsumo * ($fila['por1'] / 100);
+
+    $pdf->Cell(25,9,'$ '.formatearNum($precioInsumo),0,0,'C',1);
     $pdf->SetFillColor(247,247,247);
 
     function calcularPrecioPorcentaje($precioTC,$porcentajeTC){
@@ -111,14 +125,15 @@ $fila = mysqli_fetch_array($query);
     }
 
     $precioInsumoUno = precioInsumo('p1',$fila['p1'],$conexion);
-    $porcentajeInsumoUno = porceTC($fila['agua'],$fila['por1']);
+
+    $porcentajeInsumoUno = porceMS($fila['p1'],$fila['por1'],$conexion);
 
     $pdf->Cell(25,9,"$ ".formatearNum(calcularPrecioPorcentaje($precioInsumoUno,$porcentajeInsumoUno)),0,0,'C',1);
     $porMS = tomaPorcentajeMS('p1',$fila['p1'],$conexion);
     $pdf->SetFillColor(236,236,236);
     $pdf->Cell(25,9,$porMS." %",0,0,'C',1);
     $pdf->SetFillColor(247,247,247);
-    $pdf->Cell(30,9,formatearNum(((porceTC($fila['agua'],$fila['por1'])*$porMS)/100)).' %',0,1,'C',1);
+    $pdf->Cell(30,9,formatearNum(((porceMS($fila['p1'],$fila['por1'],$conexion)*$porMS)/100)).' %',0,1,'C',1);
     $pdf->SetFillColor(222,222,222);
     $pdf->Cell(195,.2,'',0,1 ,'',1);
 
@@ -127,17 +142,22 @@ $fila = mysqli_fetch_array($query);
       $porcentaje = "por".($i+1);
       if($fila[$producto] != ''){ 
         $precioInsumo = precioInsumo($producto,$fila[$producto],$conexion);
+
+
+        $precioInsumoTotal += $precioInsumo * ($fila[$porcentaje] / 100);
+
         $porcentajeMS = tomaPorcentajeMS($producto,$fila[$producto],$conexion);
-        $porcentajeInsumo = porceTC($fila['agua'],$fila[$porcentaje]);
+
+        $porcentajeInsumo = porceMS($fila[$producto],$fila[$porcentaje],$conexion);
        
         $pdf->SetFillColor(247,247,247);
-        $pdf->Cell(40,9, nombreInsumo($producto,$fila[$producto],$conexion),0,0,'L',1);
+        $pdf->Cell(40,9,nombreInsumo($producto,$fila[$producto],$conexion),0,0,'L',1);
         $pdf->SetFillColor(236,236,236);
         $pdf->Cell(25,9,number_format($fila[$porcentaje],2,",",".")." %",0,0,'C',1);
         $pdf->SetFillColor(247,247,247);
-        $pdf->Cell(25,9,formatearNum(porceTC($fila['agua'],$fila[$porcentaje]))." %",0,0,'C',1);
+        $pdf->Cell(25,9,formatearNum(porceMS($fila[$producto],$fila[$porcentaje],$conexion))." %",0,0,'C',1);
         $pdf->SetFillColor(236,236,236);
-        $pdf->Cell(25,9,"$ ".number_format(precioInsumo($producto,$fila[$producto],$conexion),2,",","."),0,0,'C',1);
+        $pdf->Cell(25,9,"$ ".number_format($precioInsumo,2,",","."),0,0,'C',1);
         $pdf->SetFillColor(247,247,247);
         $pdf->Cell(25,9,"$ ".formatearNum(calcularPrecioPorcentaje($precioInsumo,$porcentajeInsumo)),0,0,'C',1);
         $pdf->SetFillColor(236,236,236);
@@ -145,7 +165,7 @@ $fila = mysqli_fetch_array($query);
         ${"porMS".($i+1)} = tomaPorcentajeMS($producto,$fila[$producto],$conexion);
         $pdf->Cell(25,9,${"porMS".($i+1)}." %",0,0,'C',1);
         $pdf->SetFillColor(247,247,247);
-        $pdf->Cell(30,9,formatearNum(((porceTC($fila['agua'],$fila[$porcentaje])*${"porMS".($i+1)})/100))." %",0,1,'C',1);
+        $pdf->Cell(30,9,formatearNum(((porceMS($fila[$producto],$fila[$porcentaje],$conexion)*${"porMS".($i+1)})/100))." %",0,1,'C',1);
         $pdf->SetFillColor(222,222,222);
         $pdf->Cell(195,.2,'',0,1 ,'',1);
 
@@ -153,26 +173,21 @@ $fila = mysqli_fetch_array($query);
         }
     }
     $pdf->SetFillColor(247,247,247);
-    $pdf->Cell(40,10,'Agua',0,0,'L',1);
-    $pdf->SetFillColor(236,236,236);                      
-    $pdf->Cell(25,10,formatearNum($fila['agua'])." %",0,0,'C',1);
-    $pdf->SetFillColor(247,247,247);                      
-    $pdf->Cell(25,10,formatearNum(porceTC($fila['agua'],$fila['agua']))." %",0,1,'C',1);
     $pdf->SetFont('Helvetica','',8);
     $pdf->Cell(40,8,'*Valores en base a 1 Kilo de Formula.',0,1,'L',0);
     $pdf->SetFont('Helvetica','b',12);
     $pdf->SetFillColor(247,247,247);
     $pdf->Cell(43,10,'Precio por Kilo:',0,0,'L',1);
     $pdf->SetFillColor(236,236,236);
-    $pdf->Cell(150,10,'   $ '.formatearNum($fila['precio']),0,1,'L',1); 
+    $pdf->Cell(150,10,'   $ '.formatearNum($precioInsumoTotal),0,1,'L',1); 
     $pdf->Cell(43,10,'Precio por Kilo MS: ',0,0,'L',1);
     $pdf->SetFillColor(247,247,247);
-    $pdf->Cell(150,10,'   $ '.$precioPor,0,1,'L',1); 
+    $pdf->Cell(150,10,'   $ '.formatearNum($fila['precio']),0,1,'L',1); 
     $pdf->Cell(43,10,'Total % de MS:',0,0,'L',1);
     $pdf->SetFillColor(236,236,236);
     $pdf->Cell(150,10,'  '.$totalMS.'%',0,1,'L',1);
  
-     $pdf->Output();
+    $pdf->Output();
     
 ?>
     

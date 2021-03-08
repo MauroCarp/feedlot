@@ -46,7 +46,11 @@ if ($_FILES['exportado']["error"] > 0){
 
         die();
 
-        header("Location:datos.php?seccion=$seccion");
+        
+        
+        echo "<script>
+        window.location = 'datos.php?seccion=$seccion';
+    </script>";
 ?>
 
   
