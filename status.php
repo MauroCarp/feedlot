@@ -279,7 +279,7 @@ if ($accionValido) {
                               <select class="form-control" id="inputOperario" name="operario">
                                 <option value="">Seleccionar Operario</option> 
                               <?php
-                                $sqlOp = "SELECT * FROM operarios WHERE feedlot = '$feedlot' ORDER BY nombre ASC";
+                                $sqlOp = "SELECT * FROM operarios ORDER BY nombre ASC";
                                 $queryOp = mysqli_query($conexion,$sqlOp);
                                 while ($filaOp = mysqli_fetch_array($queryOp)){ ?> 
                                   <option value="<?php echo $filaOp['nombre']?>"><?php echo $filaOp['nombre']?></option>  

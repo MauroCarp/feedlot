@@ -16,52 +16,60 @@
 
             <th></th>
 
+            <th></th>
+
           </thead>
 
           <tbody>
 
-            <tr>
+            <form action="raciones.php?accion=ingresoMixer" method="POST">
             
-              <td>
-            
-                  <input type="date" class="form-control" id="fecha" name="fecha" style="height:34px;">
-
-              </td>
-
-              <td>
-            
-                <select class="form-control" id="operario" name="operario">
-
-                  <option value="">Seleccionar Operario</option>
-
-                <select>
-
-              </td>
-
-              <td>
-            
-                <select class="form-control" id="formula" name="formula">
-
-                  <option value="">Seleccionar Formula</option>
-
-                <select>
-
-              </td>
+              <tr>
               
-              <td>
+                <td>
+              
+                    <input type="date" class="form-control" id="fecha" name="fecha" style="height:34px;">
+
+                </td>
+
+                <td>
+              
+                  <select class="form-control" id="operario" name="operario">
+
+                    <option value="">Seleccionar Operario</option>
+
+                  <select>
+
+                  <input type="text" class="form-control" id="otroOperario" name="otroOperario"  placeholder="Otro Operario">
+
+
+                </td>
+
+                <td>
+              
+                  <select class="form-control" id="formula" name="formula">
+
+                    <option value="">Seleccionar Formula</option>
+
+                  <select>
+
+                </td>
+                
+                <td>
+              
+                    <input type="number" class="form-control input-small" id="kilos" name="kilos" style="height:34px;" placeholder="Kilos">
+
+                </td>
+
+                <td colspan="2">
+
+                  <button class="btn btn-primary btn-block" id="cargarMixer">Cargar</button>
+
+                </td>
+
+              </tr>
             
-                  <input type="number" class="form-control input-small" id="kilos" name="kilos" style="height:34px;" placeholder="Kilos">
-
-              </td>
-
-              <td>
-
-                <button class="btn btn-primary btn-block" id="cargarMixer">Cargar</button>
-
-              </td>
-
-            </tr>
-
+            </form>
             <?php
             
               $sql = "SELECT * FROM mixer WHERE feedlot = '$feedlot' ORDER BY fecha ASC";
@@ -97,6 +105,12 @@
                         <td>
   
                           <a href='#' data-toggle='modal' data-target='#modalVerMixer$id' onclick='verModalMixer($id)'><span class='icon-eye'></span></a>
+  
+                        </td>
+
+                        <td>
+  
+                          <a href='raciones.php?accion=eliminarMixer&id=$id'><span class='icon-bin2'></span></a>
   
                         </td>
 
@@ -383,3 +397,35 @@
       </div>
 
     </div>
+
+<script>
+
+$(document).ready(function() {
+    
+    $('#otroOperario').css('display','none');
+
+    $('#operario').change(function(){
+
+      var valor = $(this).val();
+
+      if(valor == 'otroOperario'){
+
+        $('#otroOperario').css('display','block');
+        
+      }else{
+        
+        $('#otroOperario').css('display','none');
+
+      }
+
+    });
+
+    var feedlot = '<?php echo $feedlot?>';
+        
+    cargarSelect('formulas',feedlot);
+    
+    cargarSelect('operarios',feedlot);
+
+});
+
+</script>

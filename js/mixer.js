@@ -139,3 +139,33 @@ function imprimirMixer(idRacion){
     window.open('imprimir/mixer.php?id=' + id + '&totalMS=' + totalMS);
   
 }
+
+
+function cargarSelect(tabla){
+
+    var data = 'tabla=' + tabla;
+
+    var url = 'ajax/cargarSelectMixer.ajax.php';
+
+    $.ajax({
+        url: url,
+        data: data,
+        type: 'POST',
+        success: function(respuesta){
+            
+            if(tabla == 'formulas'){
+                
+                $('#formula').append(respuesta);
+                
+            }else{
+                
+                $('#operario').append(respuesta);
+            
+            }
+
+        }  
+
+    });
+
+}
+

@@ -20,37 +20,102 @@ foreach ($operarios as $nombreFeedlot => $operario) {
 }
 
 if ($accionValido) {
+ 
   $accion = $_GET['accion'];
 
+  // INGRESO MIXER
 
-  if ($accion == "ingresar") {
-    $fecha = $_POST['fechaIngreso'];
-    $turno = $_POST['turno'];
+  if ($accion == "ingresoMixer") { 
+
+    $fecha = $_POST['fecha'];
+
     $formula = $_POST['formula'];
-    $corral = $_POST['corral'];
-    $kilos = $_POST['kilos'];
     
+    $kilos = $_POST['kilos'];
 
     $operario = $_POST['operario'];
-    $otroOperario = $_POST['operarioOtro'];
 
-    if ($operario == 'otro') {
+    $otroOperario = $_POST['otroOperario'];
+
+    if ($operario == 'otroOperario') {
+
       $operario = $otroOperario;
+
       $sqlNueva = "INSERT INTO operarios(feedlot,nombre) VALUES ('$feedlot','$operario')";
-      $queryNueva = mysqli_query($conexion,$sqlNueva);
+
+      mysqli_query($conexion,$sqlNueva);
 
     }
 
 
-    $sql = "INSERT INTO raciones(feedlot,fecha,turno,operario,formula,corral,kilos) 
-    VALUES ('$feedlot','$fecha','$turno','$operario','$formula','$corral','$kilos')";
-    $query = mysqli_query($conexion,$sql);
-    echo mysqli_error($conexion);
+    $sql = "INSERT INTO mixer(feedlot,fecha,operario,formula,kilos) 
+
+    VALUES ('$feedlot','$fecha','$operario','$formula','$kilos')";
+
+    mysqli_query($conexion,$sql);
 
     echo "<script>
-	    window.location = 'raciones.php?seccion=ingreso';
+	    window.location = 'raciones.php?seccion=mixer';
+    </script>";
+
+  }
+
+  if ($accion == 'cargarRedondeo') {
+
+    $redondeo = array();
+
+    for ($i=1; $i <= 30; $i++) { 
+
+      $numero = "redondeo".$i;
+
+     if (isset($_POST[$numero])) {
+
+         $redondeo[] = $_POST[$numero];
+
+        }
+
+    }
+
+    $redondeo = implode(",", $redondeo);
+
+    $margen = $_POST['margenError'];
+
+    $id = $_GET['id'];
+
+    $sqlRedondeo = "UPDATE mixer SET
+
+    redondeo = '$redondeo',
+    
+    margen = '$margen'
+
+    WHERE id = '$id'";
+
+    $queryRedondeo = mysqli_query($conexion,$sqlRedondeo);
+
+    echo "<script>
+	    window.location = 'raciones.php?seccion=mixer';
     </script>";
   }
+
+  if ($accion == 'eliminarMixer'){
+
+    $id = $_GET['id'];
+
+    $sql = "DELETE FROM mixer WHERE id = '$id'";
+
+    $query = mysqli_query($conexion,$sql);
+
+    echo "<script>
+
+	    window.location = 'raciones.php?seccion=mixer';
+
+    </script>";
+
+
+
+  }
+
+  // INGRESO RACIONES DESDE MIXER
 
   if ($accion == 'modificarIngreso') {
     $id = $_GET['id'];
@@ -119,42 +184,6 @@ if ($accionValido) {
     </script>";
   }
 
-  if ($accion == 'cargarRedondeo') {
-
-    $redondeo = array();
-
-    for ($i=1; $i <= 30; $i++) { 
-
-      $numero = "redondeo".$i;
-
-     if (isset($_POST[$numero])) {
-
-         $redondeo[] = $_POST[$numero];
-
-        }
-
-    }
-
-    $redondeo = implode(",", $redondeo);
-
-    $margen = $_POST['margenError'];
-
-    $id = $_GET['id'];
-
-    $sqlRedondeo = "UPDATE mixer SET
-
-    redondeo = '$redondeo',
-    
-    margen = '$margen'
-
-    WHERE id = '$id'";
-
-    $queryRedondeo = mysqli_query($conexion,$sqlRedondeo);
-
-    echo "<script>
-	    window.location = 'raciones.php?seccion=mixer';
-    </script>";
-  }
 
 
 /////// INSUMOS  ////////
@@ -202,9 +231,9 @@ if ($accionValido) {
     mysqli_query($conexion,$sql);
 
 
-  $sqlRegistro = "INSERT INTO registroinsumo(insumo,precio,porceMS,fecha) VALUES ('$insumo','$precio','$porceMS','$fecha')";
-  
-  mysqli_query($conexion,$sqlRegistro);
+    $sqlRegistro = "INSERT INTO registroinsumo(insumo,precio,porceMS,fecha) VALUES ('$insumo','$precio','$porceMS','$fecha')";
+    
+    mysqli_query($conexion,$sqlRegistro);
 
     echo "<script>
 
@@ -475,7 +504,7 @@ if ($accionValido) {
         
         $sqlNueva = "INSERT INTO tipoFormula(tipo) VALUES ('$tipoFormula')";
         
-        $queryNueva = mysqli_query($conexion,$sqlNueva);
+        mysqli_query($conexion,$sqlNueva);
         
       }
       
@@ -489,8 +518,6 @@ if ($accionValido) {
       $sql = "INSERT INTO formulas(fecha,nombre,tipo,precio) VALUES ('$fechaFormula','$nombre','$tipoFormula','$total')";
 
       $query = mysqli_query($conexion,$sql);
-
-      echo mysqli_error($conexion);
 
     
       $sqlDatos = "SELECT id FROM formulas WHERE tipo = '$tipoFormula' AND nombre = '$nombre'";
@@ -506,7 +533,7 @@ if ($accionValido) {
 
         $sqlProductos = "UPDATE formulas SET $producto = '$productos[$i]' WHERE id = '$id'"; 
 
-        $queryProductos = mysqli_query($conexion,$sqlProductos);
+        mysqli_query($conexion,$sqlProductos);
 
       }
 
@@ -517,9 +544,8 @@ if ($accionValido) {
 
         $sqlPorc = "UPDATE formulas SET $porcentaje = '$porcentajes[$i]' WHERE id = '$id'"; 
 
-        $queryPorc = mysqli_query($conexion,$sqlPorc);
+        mysqli_query($conexion,$sqlPorc);
 
-        echo mysqli_error($conexion);
 
       }      
     
@@ -530,15 +556,40 @@ if ($accionValido) {
   }
 
   if ($accion == 'eliminarFormula') {
+    
     $id = $_GET['id'];
+    
     $sqlFormula = "DELETE FROM formulas WHERE id = '$id'";
-    $queryFormula = mysqli_query($conexion,$sqlFormula);
-    echo mysqli_error($conexion);
+    
+    mysqli_query($conexion,$sqlFormula);
     
     echo "<script>
 	    window.location = 'raciones.php?seccion=formulas';
     </script>";
   }
+
+
+/*********
+                PREMIX
+                            *********/
+
+  if ($accion == 'eliminarPremix'){
+
+    $id = $_GET['id'];
+
+    $sql = "DELETE FROM premix WHERE id = '$id'";
+
+    mysqli_query($conexion,$sql);
+
+       
+    echo "<script>
+	    window.location = 'raciones.php?seccion=premix';
+    </script>";
+
+    
+
+  }
+
 }
 
   
