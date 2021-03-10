@@ -13,7 +13,7 @@
 
         <div class="span4" style="padding-left:15px;">
 
-          <input type="text" name="nombre" class="form-control" placeholder="Nombre Premix">
+          <input type="text" name="nombre" class="form-control" placeholder="Nombre Premix" required>
 
         </div>
 
@@ -35,6 +35,10 @@
 
           <div class="span2"><b>$ Precio</b></div>
 
+          <div class="span2"><b>$ T</b></div>
+          
+          <div class="span2"><b>%</b></div>
+
         </div>
 
         <div class="contenedor-insumoPre">
@@ -43,17 +47,30 @@
 
             <div class="span3 ">
 
-              <select class="form-control select-insumos input-medium mi-selector" name="insumoPre" id="insumoPre0" onchange="cargarPrecioInsumoPremix(this.value,this.id);">
+              <select class="form-control select-insumos input-medium" name="insumoPre" id="insumoPre0" onchange="cargarPrecioInsumoPremix(this.value,this.id);">
 
-                <option value="" style="font-size:.5em!important;">Seleccionar Insumo</option>
+                <option value="">Seleccionar Insumo</option>
 
+                <?php
+                $sql = "SELECT id, nombre FROM insumospremix ORDER BY nombre ASC";
+
+                $query = mysqli_query($conexion,$sql);
+
+
+                while($resultado = mysqli_fetch_array($query)){
+
+                    echo "<option value=".$resultado['id'].">".$resultado['nombre']."</option>";
+
+                }
+
+                ?>
               </select>
 
             </div>
 
             <div class="span2">
 
-              <input type="text"  style="font-weight: bold" value="0" id="kilosPre0" class="input-small" readonly>
+              <input type="text" class="form-control input-small kilosPre" style="font-weight: bold" value="0" id="kilosPre0" name="kilosPre" class="input-small" onchange="calcularPrecioKilo(this.value,this.id)" readonly>
 
             </div>
 
@@ -62,18 +79,61 @@
               <input type="text" class="form-control input-small preciosPre" id="precioPre0" name="precioPre" value="0" disabled="true" required/>
 
             </div>
+            
+            <div class="span2">
 
+              <input type="text" class="form-control input-small preciosKilosPre" id="precioKilosPre0" name="precioKilosPre" value="0" disabled="true"/>
+
+            </div>
+
+
+            <div class="span2">
+
+              <input type="text" class="form-control input-small totalPorcePre" id="totalPorcePre0" name="totalPorcePre" value="0" disabled="true"/>
+
+            </div>
 
             <div class="span1">
+                
 
             </div>
 
           </div>
 
         </div>
+      
+        <div class="row-fluid">
+        
+          <div class="span3" style="text-align:right;">
 
+            <b>TOTALES:</b>
+          
+          </div>
+          
+          <div class="span2">
+                
+            <input type="text"  style="font-weight: bold" value="0" id="kilosTotales" class="input-small" readonly>
+
+          </div>
+
+          <div class="span2"></div>
+          
+          <div class="span2">
+          
+            <input type="text"  style="font-weight: bold" value="0" id="precioTotal" name="precioTotal" class="input-small" readonly>
+          
+          </div>
+          
+          <div class="span2">
+          
+            <input type="text"  style="font-weight: bold" value="0" id="porceTotal" class="input-small" readonly>
+
+          </div>
+        
+        </div>
+        
         <hr>
-
+          
         <div class="row-fluid">
 
           <div class="span6">
@@ -146,7 +206,7 @@
 
               <td>
               
-                <a href="#" data-toggle="modal" data-target="#premix<?php echo $fila['id'];?>">
+                <a href="#" data-toggle="modal" data-target="#premix<?php echo $fila['id'];?>" onclick='calcularPorcentajeModal(<?php echo $fila['id'];?>)'>
               
                   <span class="icon-eye"></span>
               
@@ -174,7 +234,7 @@
 
                     <div class="modal-header">
 
-                      <h2 class="modal-title" id="modalFormula">Premix <?php echo $fila['nombre'];?></h2>
+                      <h3 class="modal-title" id="modalFormula">Premix <?php echo $fila['nombre'];?> | %MS <?php echo $fila['ms'];?> | $/Kg $<?php echo number_format($fila['precio'],2);?></h3>
 
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
 
@@ -198,7 +258,7 @@
 
                         <div class="span2">
 
-                          <b>$/Kg</b>
+                          <b>$/T</b>
 
                         </div>
 
@@ -218,20 +278,120 @@
 
                       <?php
 
-                      $nombrePremix = $fila['nombre'];
+                      $id = $fila['id'];
+                      
+                      $kilosTotal = 0;
+                      
+                      $precioTotal = 0;
 
-                      $sql = "SELECT * FROM insumos INNER JOIN premix ON insumos.insumo = premix.nombre WHERE insumos.insumo = '$nombrePremix'";
+                      $sql = "SELECT * FROM premix WHERE id = '$id'";
                       
                       $query = mysqli_query($conexion,$sql);
 
-                      while($resultado = mysqli_fetch_array($query)){
+                      while($resultado = mysqli_fetch_array($query)){ 
+
+                        
+                        for ($i=1; $i < 11 ; $i++) { 
+                          
+                          $insumo = 'p'.$i;
+                          
+                          $kilos = 'kg'.$i;
+
+                          if($resultado[$insumo] != null){
+
+                            $nombre = dataInsumoPremix($resultado[$insumo],'nombre',$conexion);
+
+                            $kilos = $resultado[$kilos];
+
+                            $kilosTotal += $kilos;
+
+                            $precio = dataInsumoPremix($resultado[$insumo],'precio',$conexion);
+                            
+                            $precioKilos = ($kilos * $precio);
+                            
+                            $precioTotal += $precioKilos;
+
+                            echo "<div class='row-fluid'>
+                            
+                                    <div class='span3'>
+
+                                    <b>$nombre</b>
+                                    
+                                    </div>
+
+                                    <div class='span2'>
+                                    
+                                    <span class='kilos$id' id='kilos$i'>$kilos</span> Kg
+                                    
+                                    </div>
+
+                                    <div class='span2'>
+                                    
+                                    $ $precio
+                                    
+                                    </div>
+
+                                    <div class='span2'>
+                                    
+                                    $ $precioKilos
+
+                                    </div>
+
+                                    <div class='span2'>
+                                    
+                                    <span class='porcentaje$id'></span> %
+
+                                    </div>
+                              
+                                  </div>";
+                          }else{
+                            
+                            break;
+
+                          }
+                          
+                        }
+
+                          
 
 
                       }
-
                       
                       ?>
-                    
+
+                      <div class="row-fluid" style="background-color:rgb(235,235,235);">
+                      
+                        <div class="span3">
+
+                          <b>Totales</b>
+
+                        </div>
+                      
+                        <div class="span2">
+
+                          <b><?php echo $kilosTotal;?> Kg</b>
+
+                        </div>
+                      
+                        <div class="span2">
+
+
+                        </div>
+                      
+                        <div class="span2">
+
+                          <b>$ <?php echo $precioTotal;?></b>
+
+                        </div>
+
+                        <div class="span2">
+
+                          <b id="porcentajeTotal<?php echo $id?>"></b>
+
+                        </div>
+
+                      </div>
+
                     </div>
 
                   </div>
@@ -254,6 +414,7 @@
  <script>
  $(document).ready(function(){
 
+  
 
 });
  </script>

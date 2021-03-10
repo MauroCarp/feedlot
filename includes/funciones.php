@@ -334,5 +334,19 @@ function obtenerMax($campo,$tabla,$conexion){
 	return $maximo;
 }
 
+
+function dataInsumoPremix($id,$campo,$conexion){
+
+	$sql = "SELECT $campo FROM insumospremix WHERE id = '$id'";
+
+	$query = mysqli_query($conexion,$sql);
+
+	$resultado = mysqli_fetch_array($query);
+
+	return $resultado[$campo];
+}	
+
+
+
 ?>
 

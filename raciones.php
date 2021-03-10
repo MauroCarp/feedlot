@@ -572,12 +572,97 @@ if ($accionValido) {
 /*********
                 PREMIX
                             *********/
+  if ($accion == 'nuevoPremix'){
+    
+    $nombre = $_POST['nombre'];
+    
+    $ms = $_POST['porcentajeMSPre'];
+
+    $precioTotal = substr($_POST['precioTotal'],1);
+
+    $insumos = array();
+
+    $rows = array();
+    
+    $values = array();
+
+    $insumos[] = $_POST['insumoPre'];
+
+    $rows[] = 'p1';
+    
+    
+    for ($i=1; $i <=10 ; $i++) { 
+
+      $insumo = "insumoPre".$i;
+      
+      if (isset($_POST[$insumo])) {
+        
+        $insumos[] = $_POST[$insumo];
+        
+        $rows[] = 'p'.($i+1); 
+        
+      }
+      
+    }
+    
+    $rows[] = 'kg1';
+
+    $kilos = array();
+
+    $kilos[] = $_POST['kilosPre'];
+
+    for ($a=1; $a <=30 ; $a++) { 
+
+      $kilo = "kilosPre".$a;
+
+      if (isset($_POST[$kilo])) {
+
+        $kilos[] = $_POST[$kilo];
+
+        $rows[] = 'kg'.($a+1);
+
+      }
+
+    }
+
+    $rows = implode(',',$rows);
+
+    $insumos = implode(',',$insumos);
+
+    $precioKilo = ($precioTotal / array_sum($kilos) );
+
+    $kilos = implode(',',$kilos);
+
+    $fecha = date("Y-m-d");
+    
+    $sql = "INSERT INTO premix(fecha,nombre,precio,ms,$rows) VALUES ('$fecha','$nombre','$precioKilo','$ms',$insumos,$kilos)";
+
+    $query = mysqli_query($conexion,$sql);
+
+    $sql = "INSERT INTO insumos(feedlot,insumo,tipo,precio,porceMS,fecha) VALUES('$feedlot','$nombre','Premix','$precioKilo','$ms','$fecha')";
+        
+    $query = mysqli_query($conexion,$sql);
+    
+    echo "<script>
+    
+      window.location = 'raciones.php?seccion=premix';
+    
+    </script>";  
+    
+  
+  }
 
   if ($accion == 'eliminarPremix'){
 
     $id = $_GET['id'];
 
+    $nombre = $_GET['nombre'];
+
     $sql = "DELETE FROM premix WHERE id = '$id'";
+    
+    mysqli_query($conexion,$sql);
+
+    $sql = "DELETE FROM insumos WHERE insumo = '$nombre'";
 
     mysqli_query($conexion,$sql);
 
@@ -772,6 +857,7 @@ if ($accionValido) {
     <script src="js/formulas.js"></script>
     <script src="js/mixer.js"></script>
     <script src="js/insumos.js"></script>
+    <script src="js/premix.js"></script>
     
   </body>
 </html>
